@@ -1,6 +1,6 @@
 import useInput from "../../hooks/useInput.tsx";
 import {getCoordinates} from "../../services/getCoordinates.ts";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 
 interface SearchProps {
@@ -10,11 +10,20 @@ interface SearchProps {
 export default function Search({ cityName }: SearchProps) {
     const [placeHolderCity, setPlaceHolderCity] = useState(cityName?.trim() || "Введите город...");
     const city = useInput("");
+
     const postCity = () => {
         getCoordinates(city.value);
         setPlaceHolderCity(city.value);
         city.setValue("");
     }
+
+    useEffect(() => {
+        if (cityName) {
+            getCoordinates(cityName);
+            setPlaceHolderCity(cityName);
+            city.setValue("");
+        }
+    }, [cityName]);
 
 
     return (
