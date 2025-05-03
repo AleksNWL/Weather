@@ -1,0 +1,19 @@
+{
+  "short_name": "Weather",
+  "name": "Weather Widget",
+  "icons": [
+    {
+      "src": "/src/assets/img/appIcons/weather.png",
+      "type": "img/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/src/assets/img/appIcons/weather-icon-144x144.png",
+      "type": "img/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "minimal-ui"
+}
