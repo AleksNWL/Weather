@@ -4,14 +4,20 @@
   "icons": [
     {
       "src": "/src/assets/img/appIcons/weather.png",
-      "type": "img/png",
+      "type": "image/png",
       "sizes": "512x512"
     },
     {
       "src": "/src/assets/img/appIcons/weather-icon-144x144.png",
-      "type": "img/png",
-      "sizes": "192x192",
+      "type": "image/png",
+      "sizes": "144x144",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/src/assets/img/appIcons/weather-icon-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144",
+      "purpose": "any"
     }
   ],
   "start_url": "/",
