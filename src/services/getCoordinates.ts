@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {getWeather} from "./getWeather.ts";
 import {getCity} from "./getCity.ts";
 
 
@@ -20,9 +19,9 @@ export const getCoordinates = async (city: string) => {
         const { data } = await axios.get(endpoint, { params });
 
         if (data?.results?.length > 0) {
-            console.log(data?.results);
-            await getWeather(data.results[0]);
-            await getCity(data.results[0]);
+            const coordinates = data.results[0];
+            await getCity(coordinates);
+            return coordinates;
         } else {
             return null;
         }

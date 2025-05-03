@@ -16,7 +16,12 @@ export const getWeather = async (coordinates: CoordinatesType) => {
         timezone: "auto"
     };
 
-    const { data } = await axios.get(endpoint, { params });
-
-    console.log(data);
+    try {
+        const { data } = await axios.get(endpoint, { params });
+        return data;
+    }
+    catch (error) {
+        console.error(error);
+        return null;
+    }
 }

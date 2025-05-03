@@ -18,5 +18,6 @@ export const getCity = async (coordinates: CoordinatesType) => {
     }
     catch (error) {
         console.error(error);
+        return null;
     }
 }

@@ -1,0 +1,14 @@
+.container-carousel {
+  width: 70%;
+  display: flex;
+  gap: 1rem;
+  background-color: #78bcff;
+  overflow-x: scroll;
+  padding: 30px;
+}
+
+.container-carousel__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

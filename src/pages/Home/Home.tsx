@@ -1,6 +1,8 @@
 import Search from "../../components/Search/Search.tsx";
 import {useEffect, useState} from "react";
 import {getCity} from "../../services/getCity.ts";
+import MainWeather from "../../components/MainWeather/MainWeather.tsx";
+import DailyCarousel from "../../components/DailyCarousel/DailyCarousel.tsx";
 
 
 export default function Home() {
@@ -15,6 +17,8 @@ export default function Home() {
     return (
         <>
             <h1>Погода</h1>
+            <MainWeather/>
+            <DailyCarousel/>
             <Search cityName={ city }/>
         </>
     )
