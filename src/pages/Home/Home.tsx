@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {getCity} from "../../services/getCity.ts";
 import MainWeather from "../../components/MainWeather/MainWeather.tsx";
 import DailyCarousel from "../../components/DailyCarousel/DailyCarousel.tsx";
+import "./Home.scss"
 
 
 export default function Home() {
@@ -15,11 +16,10 @@ export default function Home() {
     }, [])
 
     return (
-        <>
-            <h1>Погода</h1>
+        <div className="main-container">
+            <Search cityName={ city }/>
             <MainWeather/>
             <DailyCarousel/>
-            <Search cityName={ city }/>
-        </>
+        </div>
     )
 }

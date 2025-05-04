@@ -13,7 +13,7 @@ export function getAllDay(data: hourlyWeatherType) {
         return hourTime > now;
     })
 
-    const start = Math.max(0, index - 1);
+    const start = Math.max(0, index);
     const end = start + 24;
 
     return {
