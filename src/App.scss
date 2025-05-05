@@ -47,8 +47,8 @@ body {
     max-width: 2400px;
     margin: 0 auto;
     font-family: "Rubik", sans-serif;
-    background-color: #8FCDFF;
-    color: #fff;
+    background-color: var(--color-primary-bg);
+    color: var(--color-primary-text);
 }
 
 span {

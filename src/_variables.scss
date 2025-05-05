@@ -1,0 +1,15 @@
+:root {
+  --color-primary-bg: #8FCDFF;
+  --color-primary-text: #ffffff;
+  --color-secondary-bg: #41B6FF;
+  --color-secondary-text: #ffffff;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] {
+  --color-primary-bg: #2B2B2B;
+  --color-primary-text: #ffffff;
+  --color-secondary-bg: #ffffff;
+  --color-secondary-text: #ffffff;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+}
