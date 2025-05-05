@@ -1,4 +1,4 @@
-export interface CoordinatesType {
+export interface CoordinatesTypes {
     latitude: number;
     longitude: number;
     accuracy?: number | null;

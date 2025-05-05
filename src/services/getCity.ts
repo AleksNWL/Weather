@@ -1,8 +1,8 @@
 import axios from "axios";
-import {CoordinatesType} from "../types/coordinatesType.ts";
+import {CoordinatesTypes} from "../types/coordinatesTypes.ts";
 
 
-export const getCity = async (coordinates: CoordinatesType) => {
+export const getCity = async (coordinates: CoordinatesTypes) => {
     const endpoint = 'https://nominatim.openstreetmap.org/reverse';
     const params = {
         lat: coordinates.latitude,

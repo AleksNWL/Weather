@@ -1,8 +1,8 @@
 import axios from "axios";
-import {CoordinatesType} from "../types/coordinatesType.ts";
+import {CoordinatesTypes} from "../types/coordinatesTypes.ts";
 
 
-export const getWeather = async (coordinates: CoordinatesType) => {
+export const getWeather = async (coordinates: CoordinatesTypes) => {
     if (!coordinates) {
         return;
     }

@@ -1,20 +1,24 @@
-import { createContext, useContext, useState } from "react";
-import {CoordinatesType} from "../types/coordinatesType.ts";
+import {createContext, ReactNode, useContext, useState} from "react";
+import {CoordinatesTypes} from "../types/coordinatesTypes.ts";
 import {getWeather} from "../services/getWeather.ts";
+import {WeatherData} from "../types/weatherTypes.ts";
 
-type WeatherData = any;
 
 interface WeatherContextType {
     weather: WeatherData | null;
-    setCoordinates: (coords: CoordinatesType) => void;
+    setCoordinates: (coords: CoordinatesTypes) => void;
+}
+
+interface WeatherProviderProps {
+    children: ReactNode;
 }
 
 const WeatherContext = createContext<WeatherContextType | null>(null);
 
-export const WeatherProvider = ({ children }) => {
+export const WeatherProvider = ({ children }: WeatherProviderProps) => {
     const [weather, setWeather] = useState<WeatherData | null>(null);
 
-    const setCoordinates = async (coords: CoordinatesType) => {
+    const setCoordinates = async (coords: CoordinatesTypes) => {
         const data = await getWeather(coords);
         if (data) {
             setWeather(data);
