@@ -40,7 +40,7 @@ export default function MainWeather() {
                     </div>
                 </div>
             </div>
-            <img src={getIconWeather(weather.current_weather.weathercode)} alt={weather.current_weather.weathercode} className="weather-icon" />
+            <img src={getIconWeather(weather.current_weather.weathercode)} alt={weather.current_weather.weathercode.toString()} className="weather-icon" />
         </div>
     )
 }

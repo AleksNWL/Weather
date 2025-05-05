@@ -15,7 +15,7 @@ export default function DailyCarousel() {
             <div className="container-carousel__item">
                 <span>Сейчас</span>
                 <div>
-                    <img src={getIconWeather(weather.current_weather.weathercode)} alt={weather.current_weather.weathercode} />
+                    <img src={getIconWeather(weather.current_weather.weathercode)} alt={weather.current_weather.weathercode.toString()} />
                 </div>
                 <span>{Math.round(weather.current_weather.temperature)}°C</span>
             </div>

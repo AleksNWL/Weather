@@ -6,10 +6,10 @@ export interface WeatherData {
     timezone: string;
     elevation: number;
     timezone_abbreviation: string;
-    current_weather: CurrentWeather[];
-    current_weather_units: CurrentWeatherUnits[];
-    hourly: Hourly[];
-    hourly_units: HourlyUnits[];
+    current_weather: CurrentWeather;
+    current_weather_units: CurrentWeatherUnits;
+    hourly: Hourly;
+    hourly_units: HourlyUnits;
 }
 
 interface CurrentWeather {
