@@ -3,5 +3,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px;
+  gap: 3.5rem;
+  margin-top: 50px;
+}
+
+.main-weather-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.mini-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--color-secondary-bg);
+  padding: 40px;
+  border-radius: 10px;
 }

@@ -22,7 +22,7 @@ export default function DailyCarousel() {
             {hourly.time.map((time, i) => {
                 if (new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).startsWith("00")) {
                     return (
-                        <>
+                        <div key={time} className="container-carousel__item-zero">
                             <div className="container-new-day">
                                 <div className="new-day__line"></div>
                                 <div className="new-day__date">{new Date(time).toLocaleDateString([], { weekday: "short", day: "2-digit" })}</div>
@@ -34,7 +34,7 @@ export default function DailyCarousel() {
                                 </div>
                                 <span>{Math.round(hourly.temperature_2m[i])}°C</span>
                             </div>
-                        </>
+                        </div>
                     )
                 } else {
                     return (

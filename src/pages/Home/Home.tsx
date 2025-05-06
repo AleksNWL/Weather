@@ -1,9 +1,11 @@
 import Search from "../../components/Search/Search.tsx";
 import {useEffect, useState} from "react";
 import {getCity} from "../../services/getCity.ts";
-import MainWeather from "../../components/MainWeather/MainWeather.tsx";
+import MainTemperature from "../../components/MainTemperature/MainTemperature.tsx";
 import DailyCarousel from "../../components/DailyCarousel/DailyCarousel.tsx";
 import "./Home.scss"
+import MainWeatherInfo from "../../components/MainWeatherInfo/MainWeatherInfo.tsx";
+import SearcherPrecipitation from "../../components/MainTemperature/SearcherPrecipitation/SearcherPrecipitation.tsx";
 
 
 export default function Home() {
@@ -18,7 +20,13 @@ export default function Home() {
     return (
         <div className="main-container">
             <Search cityName={ city }/>
-            <MainWeather/>
+            <div className="main-weather-container">
+                <div className="mini-container">
+                    <MainTemperature/>
+                    <SearcherPrecipitation/>
+                </div>
+                <MainWeatherInfo/>
+            </div>
             <DailyCarousel/>
         </div>
     )
