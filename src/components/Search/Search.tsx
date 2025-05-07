@@ -1,9 +1,9 @@
-import useInput from "../../hooks/useInput.tsx";
 import {getCoordinates} from "../../services/getCoordinates.ts";
 import {useState, useEffect} from "react";
 import {useWeather} from "../../context/WeatherContext.tsx";
 import "./Search.scss";
 import search from "../../../public/img/tools/search.svg"
+import {helpSearch} from "../../services/helpSearch.ts";
 
 
 interface SearchProps {
@@ -12,17 +12,40 @@ interface SearchProps {
 
 export default function Search({ cityName }: SearchProps) {
     const [placeHolderCity, setPlaceHolderCity] = useState(cityName?.trim() || "Введите город...");
-    const city = useInput("");
     const { setCoordinates } = useWeather();
+    const [city, setCity] = useState("");
 
 
     const postCity = async () => {
-        const coords = await getCoordinates(city.value);
+        const coords = await getCoordinates(city);
         if (coords) {
             setCoordinates(coords);
-            setPlaceHolderCity(city.value);
-            city.setValue("");
+            setPlaceHolderCity(city);
+            setCity("");
         }
+    }
+
+    const keyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            (async () => {
+               try {
+                   await postCity();
+               } catch (err) {
+                   console.error(err);
+               }
+            })()
+        }
+    }
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCity(e.target.value);
+        (async () => {
+           try {
+               await helpSearch(e.target.value);
+           } catch (err) {
+               console.error(err);
+           }
+        })()
     }
 
     useEffect(() => {
@@ -32,7 +55,7 @@ export default function Search({ cityName }: SearchProps) {
                 if (coords) {
                     setCoordinates(coords);
                     setPlaceHolderCity(cityName);
-                    city.setValue("");
+                    setCity("");
                 }
             })();
         }
@@ -40,8 +63,8 @@ export default function Search({ cityName }: SearchProps) {
 
 
     return (
-        <div className="search-container">
-            <input type="text" placeholder={placeHolderCity} {...city} className="search-input"/>
+        <div className="search-container" onKeyDown={keyDownHandler}>
+            <input type="text" placeholder={placeHolderCity} onChange={onChange} value={city} className="search-input"/>
             <img onClick={postCity} src={search} alt={search} className="search-icon" />
         </div>
     )

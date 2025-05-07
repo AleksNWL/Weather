@@ -70,7 +70,7 @@ export default function SearcherPrecipitation() {
             }
 
             if (startOffset === -1) {
-                setMessage("Осадков не ожидается в течение трех часов")
+                setMessage("Осадки не ожидаются в течение двух часов")
             } else {
                 const startText = startOffset === 0
                     ? "в течение часа"
