@@ -3,7 +3,7 @@
   --color-primary-text: #ffffff;
   --color-secondary-bg: #41B6FF;
   --color-secondary-text: rgba(255, 255, 255, 0.7);
-  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow: 1px 1.2px 1px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] {
@@ -11,5 +11,5 @@
   --color-primary-text: #ffffff;
   --color-secondary-bg: #ffffff;
   --color-secondary-text: rgba(255, 255, 255, 0.7);
-  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow: 1px 3px 4px rgba(0, 0, 0, 0.3);
 }

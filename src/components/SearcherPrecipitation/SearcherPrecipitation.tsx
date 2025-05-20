@@ -1,5 +1,5 @@
-import {useWeather} from "../../../context/WeatherContext.tsx";
-import {getAllDay} from "../../../services/getAllDay.ts";
+import {useWeather} from "../../context/WeatherContext.tsx";
+import {getAllDay} from "../../services/getAllDay.ts";
 import {useState, useEffect} from "react";
 
 
