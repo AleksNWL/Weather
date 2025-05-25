@@ -5,6 +5,8 @@ import Alder from "../../../public/img/tools/alder.svg";
 import Birch from "../../../public/img/tools/birch.svg";
 import Grass from "../../../public/img/tools/grass.svg";
 import Mugwort from "../../../public/img/tools/mugwort.svg";
+import {useCoordsCity} from "../../context/CoordsCityContext.tsx";
+import declineNameCity from "../../services/declineNameCity.ts";
 
 
 type NormalizedPollenKey = "birchPollen" | "alderPollen" | "grassPollen" | "mugwortPollen";
@@ -49,6 +51,7 @@ const getColor = (level: number): string => {
 export function PollenChart() {
     const { pollen } = usePollen();
     const [choice, setChoice] = useState<NormalizedPollenKey>("birchPollen");
+    const { city } = useCoordsCity();
 
     const groupedData = useMemo<PollenGroupedData | null>(() => {
         if (!pollen) return null;
@@ -130,44 +133,47 @@ export function PollenChart() {
     const selectedPollen = pollenOptions.find(t => t.key === choice);
 
     return (
-        <div className="pollen-container-chart">
-            <div className="pollen-mini-container">
-                <p>Сегодня</p>
-                <div className="pollen-choices">
-                    {pollenOptions.map(({ key, label, img }) => (
-                        <div key={key} className="pollen-choice" onClick={() => setChoice(key)}>
-                            <p>{label}</p>
-                            <div className="container-choice">
-                                <img src={img} alt={label} />
-                                <div className="pollen-level">
-                                    <div className={`high ${todayLevels[key] > 6 ? "red" : ""}`} />
-                                    <div className={`middle ${todayLevels[key] > 3 ? "yellow" : ""}`} />
-                                    <div className={`low ${todayLevels[key] > 0 ? "green" : ""}`} />
+        <div>
+            <h2 style={{fontSize:"1.2rem"}}>Активность пыльцы в {declineNameCity(city)}</h2>
+            <div className="pollen-container-chart">
+                <div className="pollen-mini-container">
+                    <p>Сегодня</p>
+                    <div className="pollen-choices">
+                        {pollenOptions.map(({ key, label, img }) => (
+                            <div key={key} className="pollen-choice" onClick={() => setChoice(key)}>
+                                <p>{label}</p>
+                                <div className="container-choice">
+                                    <img src={img} alt={label} />
+                                    <div className="pollen-level">
+                                        <div className={`high ${todayLevels[key] > 6 ? "red" : ""}`} />
+                                        <div className={`middle ${todayLevels[key] > 3 ? "yellow" : ""}`} />
+                                        <div className={`low ${todayLevels[key] > 0 ? "green" : ""}`} />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
 
-            <div className="bar-background">
-                <p>{selectedPollen?.label}</p>
-                <div className="custom-bar-chart">
-                    {chartValues.map((entry, i) => (
-                        <div className="bar-wrapper" key={i}>
-                            <div
-                                className="bar"
-                                style={{
-                                    height: `${entry.value === 0 ? 0 : 8 * entry.value}px`,
-                                    width: "20px",
-                                    backgroundColor: getColor(entry.value)
-                                }}
-                            />
-                            <span className="bar-label">{entry.label}</span>
-                        </div>
-                    ))}
+                <div className="bar-background">
+                    <p>{selectedPollen?.label}</p>
+                    <div className="custom-bar-chart">
+                        {chartValues.map((entry, i) => (
+                            <div className="bar-wrapper" key={i}>
+                                <div
+                                    className="bar"
+                                    style={{
+                                        height: `${entry.value === 0 ? 0 : 8 * entry.value}px`,
+                                        width: "20px",
+                                        backgroundColor: getColor(entry.value)
+                                    }}
+                                />
+                                <span className="bar-label">{entry.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="ok"></div>
                 </div>
-                <div className="ok"></div>
             </div>
         </div>
     );

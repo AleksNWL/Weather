@@ -4,14 +4,18 @@ import './index.css'
 import App from './App.tsx'
 import {WeatherProvider} from "./context/WeatherContext.tsx";
 import {PollenContextProvider} from "./context/PollenContext.tsx";
+import {CoordsCityProvider} from "./context/CoordsCityContext.tsx";
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <WeatherProvider>
-          <PollenContextProvider>
-              <App />
-          </PollenContextProvider>
-      </WeatherProvider>
+      <CoordsCityProvider>
+          <WeatherProvider>
+              <PollenContextProvider>
+                  <App />
+              </PollenContextProvider>
+          </WeatherProvider>
+      </CoordsCityProvider>
   </StrictMode>,
 )
 

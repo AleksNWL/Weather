@@ -10,6 +10,9 @@ export default function MainTemperature() {
     const now = new Date();
     const indexNow = weather.hourly.time.findIndex((t: string) => new Date(t) > now);
 
+    const weatherInfo = getIconWeather(weather.current_weather.weathercode)
+
+
     return (
         <div className="container-main-temperature">
             <div className="container-main-weather-info">
@@ -22,7 +25,7 @@ export default function MainTemperature() {
                     : <span className="main-apparent-temperature">Ощущается как {Math.round(weather.hourly.apparent_temperature[indexNow])}°C</span>
                 }
             </div>
-            <img src={getIconWeather(weather.current_weather.weathercode)} alt={weather.current_weather.weathercode.toString()} className="weather-icon" />
+            <img src={weatherInfo.src} alt={weatherInfo.icon} className="weather-icon" />
         </div>
     )
 }

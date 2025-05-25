@@ -13,7 +13,8 @@ export const getWeather = async (coordinates: CoordinatesTypes) => {
         longitude: coordinates.longitude,
         current_weather: true,
         hourly: "temperature_2m,apparent_temperature,precipitation,precipitation_probability,weathercode,windgusts_10m,visibility,pressure_msl,relative_humidity_2m",
-        timezone: "auto"
+        timezone: "auto",
+        forecast_days: 10
     };
 
     try {

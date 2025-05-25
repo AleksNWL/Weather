@@ -5,7 +5,7 @@ import {CoordinatesTypes} from "../types/coordinatesTypes.ts";
 export const getPollen = async (coordinates: CoordinatesTypes) => {
     const endpoint = "https://air-quality-api.open-meteo.com/v1/air-quality";
     const params = {
-        hourly: "alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,uv_index ",
+        hourly: "alder_pollen,birch_pollen,grass_pollen,mugwort_pollen",
         latitude: coordinates.latitude,
         longitude: coordinates.longitude,
     }
