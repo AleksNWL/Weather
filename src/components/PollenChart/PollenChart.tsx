@@ -37,8 +37,8 @@ const POLLEN_MAX: Record<NormalizedPollenKey, number> = {
 const getPollenLevel = (value: number, max: number): number => {
     const percent = (value * 100) / max;
     if (percent === 0) return 0;
-    if (percent <= 10) return 3;
-    if (percent <= 20) return 6;
+    if (percent <= 5) return 3;
+    if (percent <= 10) return 6;
     return 10;
 };
 

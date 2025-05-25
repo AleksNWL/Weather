@@ -8,13 +8,13 @@ import "./Home.scss";
 import MainWeatherInfo from "../../components/MainWeatherInfo/MainWeatherInfo.tsx";
 import SearcherPrecipitation from "../../components/SearcherPrecipitation/SearcherPrecipitation.tsx";
 import Footer from "../../components/Footer/Footer.tsx";
-import Pollen from "../../components/Pollen/Pollen.tsx";
 import { PollenChart } from "../../components/PollenChart/PollenChart.tsx";
 import WeekCarousel from "../../components/WeekCarousel/WeekCarousel.tsx";
-import AqiSemiCircle from "../../components/AqiSemiCircle.tsx";
+import AqiSemiCircle from "../../components/AqiSemiCircle/AqiSemiCircle.tsx";
 import { useWeather } from "../../context/WeatherContext.tsx";
 import {usePollen} from "../../context/PollenContext.tsx";
 import YesterdayWeather from "../../components/YesterweekWeather/YesterdayWeather.tsx";
+import MagneticStorm from "../../components/MagneticStorm/MagneticStorm.tsx";
 
 
 export default function Home() {
@@ -59,9 +59,6 @@ export default function Home() {
                 <DailyCarousel />
                 <div className="addition-container">
                     <div className="pollen-container">
-                        <Pollen />
-                    </div>
-                    <div className="pollen-container">
                         <PollenChart />
                     </div>
                     <div className="pollen-container">a</div>
@@ -69,9 +66,14 @@ export default function Home() {
                 <div className="week-carousel-container">
                     <WeekCarousel />
                 </div>
+                <div className="aqi-container">
+                    <AqiSemiCircle />
+                </div>
+                <div className="magnetic-container">
+                    <MagneticStorm/>
+                </div>
             </div>
             <YesterdayWeather/>
-            <AqiSemiCircle />
             <Footer />
         </>
     );

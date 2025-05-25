@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { getAirAQI } from "../services/getAirAQI.ts";
-import { useCoordsCity } from "../context/CoordsCityContext.tsx";
+import { getAirAQI } from "../../services/getAirAQI.ts";
+import { useCoordsCity } from "../../context/CoordsCityContext.tsx";
+
 
 const getAQIColor = (aqi: number): string => {
     if (aqi <= 20) return "#00e400";
@@ -12,12 +13,12 @@ const getAQIColor = (aqi: number): string => {
 };
 
 const getAQIText = (aqi: number): string => {
-    if (aqi <= 20) return "Очень хороший";
-    if (aqi <= 40) return "Хороший";
-    if (aqi <= 60) return "Удовлетворительно";
-    if (aqi <= 80) return "Умеренно плохой";
-    if (aqi <= 100) return "Плохой";
-    return "Очень плохой";
+    if (aqi <= 20) return "Очень хорошее";
+    if (aqi <= 40) return "Хорошее";
+    if (aqi <= 60) return "Удовлетворительное";
+    if (aqi <= 80) return "Умеренно плохое";
+    if (aqi <= 100) return "Плохое";
+    return "Очень плохое";
 };
 
 export function AqiSemiCircle({ maxAQI = 150 }) {
@@ -68,18 +69,19 @@ export function AqiSemiCircle({ maxAQI = 150 }) {
         const endY = cy + radius * Math.sin(angle);
 
         ctx.beginPath();
-        ctx.arc(endX, endY, 6, 0, 2 * Math.PI);
+        ctx.arc(endX, endY, 12, 0, 2 * Math.PI);
         ctx.fillStyle = color;
         ctx.fill();
     }, [aqi, maxAQI]);
 
     return (
         <div style={{ textAlign: "center" }}>
-            <canvas ref={canvasRef} width={300} height={180} />
+            <span style={{ fontWeight: "bold" }}>Качество воздуха</span>
+            <canvas ref={canvasRef} width={300} height={140} />
             {aqi !== null ? (
                 <>
                     <div style={{ fontSize: "1.2rem", fontWeight: "bold" }}>AQI: {aqi}</div>
-                    <div style={{ color: getAQIColor(aqi), marginTop: "4px" }}>{getAQIText(aqi)}</div>
+                    <div style={{ color: getAQIColor(aqi), fontSize: "16px", fontWeight: "800" }}>{getAQIText(aqi)}</div>
                 </>
             ) : (
                 <div>Нет данных AQI</div>
