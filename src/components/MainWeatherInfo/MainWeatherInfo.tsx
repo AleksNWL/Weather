@@ -2,7 +2,7 @@ import drop from "/tools/drop.svg";
 import wind from "/tools/wind.svg";
 import pressure from "/tools/pressure.svg";
 import {useWeather} from "../../context/WeatherContext.tsx";
-import "./MainWeatherInfo.scss";
+import styles from "./MainWeatherInfo.module.scss";
 
 
 export default function MainWeatherInfo() {
@@ -14,19 +14,19 @@ export default function MainWeatherInfo() {
     const nowPressure = Math.round(weather.hourly.pressure_msl[indexNow - 1] * 0.75006);
 
     return (
-        <div className="container-mini-weather">
-            <div className="container-mini-weather-info">
-                <img src={drop} alt="drop" className="icon-tools" />
-                <span>{weather.hourly.relative_humidity_2m[indexNow]}%</span>
+        <>
+            <div className={styles.container}>
+                <img src={drop} alt="drop" className={styles.icon} />
+                <span className={styles.title}>{weather.hourly.relative_humidity_2m[indexNow]}%</span>
             </div>
-            <div className="container-mini-weather-info">
-                <img src={wind} alt="wind" className="icon-tools" />
-                <span>{weather.current_weather.windspeed} м/с</span>
+            <div className={styles.container}>
+                <img src={wind} alt="wind" className={styles.icon} />
+                <span className={styles.title}>{weather.current_weather.windspeed} м/с</span>
             </div>
-            <div className="container-mini-weather-info">
-                <img src={pressure} alt="pressure" className="icon-tools" />
-                <span>{nowPressure} мм рт. ст.</span>
+            <div className={styles.container}>
+                <img src={pressure} alt="pressure" className={styles.icon} />
+                <span className={styles.title}>{nowPressure} мм рт. ст.</span>
             </div>
-        </div>
+        </>
     )
 }

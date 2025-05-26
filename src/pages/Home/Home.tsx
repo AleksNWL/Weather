@@ -19,6 +19,7 @@ import declineNameCity from "../../services/declineNameCity.ts";
 import Visibility from "../../components/Visibility/Visibility.tsx";
 import MoonPhases from "../../components/PhasesMoon/PhasesMoon.tsx";
 import UVIndex from "../../components/UVIndex/UVIndex.tsx";
+import Horoscope from "../../components/Horoscope/Horoscope.tsx";
 
 
 export default function Home() {
@@ -109,9 +110,8 @@ export default function Home() {
                     <span className={styles.heading}>Видимость на дорогах</span>
                     <Visibility/>
                 </div>
-                <div className={styles.highContainer}>
-                    <span className={styles.heading}>Гороскоп на сегодня</span>
-                    <div>Horoscope</div>
+                <div className={`${styles.highContainer} ${styles.innerContainer}`}>
+                    <Horoscope/>
                 </div>
             </div>
             <footer className={styles.footer}>

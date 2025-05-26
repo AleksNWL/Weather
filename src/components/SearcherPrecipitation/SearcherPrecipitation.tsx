@@ -1,6 +1,7 @@
 import {useWeather} from "../../context/WeatherContext.tsx";
 import {getAllDay} from "../../services/getAllDay.ts";
 import {useState, useEffect} from "react";
+import styles from "./SearcherPrecipitation.module.scss";
 
 
 export default function SearcherPrecipitation() {
@@ -83,7 +84,7 @@ export default function SearcherPrecipitation() {
     }, [weather])
 
     return (
-        <span>
+        <span className={styles.message}>
             {message}
         </span>
     );

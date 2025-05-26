@@ -1,5 +1,5 @@
 import {useWeather} from "../../context/WeatherContext.tsx";
-import "./MainTemperature.scss";
+import styles from "./MainTemperature.module.scss";
 import getIconWeather from "../../services/getIconWeather.ts";
 
 
@@ -14,18 +14,18 @@ export default function MainTemperature() {
 
 
     return (
-        <div className="container-main-temperature">
-            <div className="container-main-weather-info">
+        <div className={styles.mainContainer}>
+            <div className={styles.container}>
                 {Math.round(weather.current_weather.temperature) >= 0
-                    ? <span className="main-temperature">+{Math.round(weather.current_weather.temperature)}°C</span>
-                    : <span className="main-temperature">{Math.round(weather.current_weather.temperature)}°C</span>
+                    ? <span className={styles.temperature}>+{Math.round(weather.current_weather.temperature)}°C</span>
+                    : <span className={styles.temperature}>{Math.round(weather.current_weather.temperature)}°C</span>
                 }
                 {Math.round(weather.hourly.apparent_temperature[indexNow]) >= 0
-                    ? <span className="main-apparent-temperature">Ощущается как +{Math.round(weather.hourly.apparent_temperature[indexNow])}°C</span>
-                    : <span className="main-apparent-temperature">Ощущается как {Math.round(weather.hourly.apparent_temperature[indexNow])}°C</span>
+                    ? <span className={styles.apparentTemperature}>Ощущается как +{Math.round(weather.hourly.apparent_temperature[indexNow])}°C</span>
+                    : <span className={styles.apparentTemperature}>Ощущается как {Math.round(weather.hourly.apparent_temperature[indexNow])}°C</span>
                 }
             </div>
-            <img src={weatherInfo.src} alt={weatherInfo.icon} className="weather-icon" />
+            <img src={weatherInfo.src} alt={weatherInfo.icon} className={styles.icon} />
         </div>
     )
 }

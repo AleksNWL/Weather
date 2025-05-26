@@ -8,13 +8,26 @@
 }
 
 .mainWeather {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .mainTemperature {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 200px;
 }
 
 .mainWeatherInfo {
   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 16px;
+  border-radius: 10px;
+  max-width: 350px;
+  height: 200px;
 }
 
 .dailyContainer {
