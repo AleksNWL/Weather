@@ -17,6 +17,7 @@ import YesterdayWeather from "../../components/YesterweekWeather/YesterdayWeathe
 import MagneticStorm from "../../components/MagneticStorm/MagneticStorm.tsx";
 import declineNameCity from "../../services/declineNameCity.ts";
 import Visibility from "../../components/Visibility/Visibility.tsx";
+import MoonPhases from "../../components/PhasesMoon/PhasesMoon.tsx";
 
 
 export default function Home() {
@@ -100,7 +101,7 @@ export default function Home() {
                 </div>
                 <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
                     <span className={styles.heading}>Фаза луны</span>
-                    <div>Phases Moon</div>
+                    <MoonPhases/>
                 </div>
 
                 <div className={`${styles.middleContainer} ${styles.innerContainer}`}>
