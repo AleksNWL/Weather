@@ -14,7 +14,7 @@
 .container-carousel__scroll {
   display: flex;
   gap: 1rem;
-  width: max-content; // нужно, чтобы flex-элементы не сжимались
+  width: max-content;
 }
 
 .container-carousel__item-zero {

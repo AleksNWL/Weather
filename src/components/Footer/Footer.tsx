@@ -14,7 +14,6 @@ export default function Footer() {
                     <li className={styles.link}><span>Open-Meteo</span> — данные о погоде</li>
                     <li className={styles.link}><span>API Ninjas (Horoscope)</span> — ежедневный гороскоп</li>
                     <li className={styles.link}><span>Geoapify</span> — поисковая система</li>
-                    <li className={styles.link}><span>Nominatim</span> — определение города</li>
                 </ul>
             </div>
             <div className={styles.container}>

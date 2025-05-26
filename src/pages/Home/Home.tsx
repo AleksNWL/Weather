@@ -43,7 +43,7 @@ export default function Home() {
                 });
             }
         });
-    });
+    }, []);
 
 
 
@@ -77,7 +77,7 @@ export default function Home() {
                     <span className={styles.heading}>Качество воздуха</span>
                     <AqiSemiCircle/>
                 </div>
-                <div className={styles.littleContainer}>
+                <div className={`${styles.middleContainer} ${styles.innerContainer}`}>
                     <span className={styles.heading}>UV-индекс</span>
                     <div>UV-INDEX</div>
                 </div>
@@ -94,16 +94,16 @@ export default function Home() {
 
             <div className={styles.additionalContainer}>
 
-                <div className={styles.littleContainer}>
+                <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
                     <span className={styles.heading}>Магнитное поле</span>
                     <MagneticStorm/>
                 </div>
-                <div className={styles.littleContainer}>
+                <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
                     <span className={styles.heading}>Фаза луны</span>
                     <div>Phases Moon</div>
                 </div>
 
-                <div className={styles.middleContainer}>
+                <div className={`${styles.middleContainer} ${styles.innerContainer}`}>
                     <span className={styles.heading}>Видимость на дорогах</span>
                     <Visibility/>
                 </div>
