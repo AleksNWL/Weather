@@ -18,6 +18,7 @@ import MagneticStorm from "../../components/MagneticStorm/MagneticStorm.tsx";
 import declineNameCity from "../../services/declineNameCity.ts";
 import Visibility from "../../components/Visibility/Visibility.tsx";
 import MoonPhases from "../../components/PhasesMoon/PhasesMoon.tsx";
+import UVIndex from "../../components/UVIndex/UVIndex.tsx";
 
 
 export default function Home() {
@@ -78,9 +79,9 @@ export default function Home() {
                     <span className={styles.heading}>Качество воздуха</span>
                     <AqiSemiCircle/>
                 </div>
-                <div className={`${styles.middleContainer} ${styles.innerContainer}`}>
+                <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
                     <span className={styles.heading}>UV-индекс</span>
-                    <div>UV-INDEX</div>
+                    <UVIndex/>
                 </div>
 
                 <div className={styles.highContainer}>

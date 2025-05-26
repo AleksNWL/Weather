@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { getAirAQI } from "../../services/getAirAQI.ts";
+import { getAirData } from "../../services/getAir.ts";  // переименуй импорт если хочешь
 import { useCoordsCity } from "../../context/CoordsCityContext.tsx";
-
 
 const getAQIColor = (aqi: number): string => {
     if (aqi <= 20) return "#00e400";
@@ -23,22 +22,24 @@ const getAQIText = (aqi: number): string => {
 
 export function AqiSemiCircle({ maxAQI = 150 }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [aqi, setAqi] = useState<number | null>(null);
+    const [airData, setAirData] = useState<{ aqi: number | null; uv: number | null }>({ aqi: null, uv: null });
     const { coordinate } = useCoordsCity();
 
     useEffect(() => {
-        const fetchAQI = async () => {
+        const fetchAirData = async () => {
             if (coordinate) {
                 try {
-                    const value = await getAirAQI(coordinate);
-                    setAqi(value);
+                    const data = await getAirData(coordinate);
+                    setAirData(data);
                 } catch (err) {
-                    console.error("Ошибка при получении AQI:", err);
+                    console.error("Ошибка при получении данных воздуха:", err);
                 }
             }
         };
-        fetchAQI();
+        fetchAirData();
     }, [coordinate]);
+
+    const aqi = airData.aqi;
 
     useEffect(() => {
         if (aqi === null || !canvasRef.current) return;
