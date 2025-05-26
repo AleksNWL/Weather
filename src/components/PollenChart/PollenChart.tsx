@@ -1,10 +1,10 @@
 import { usePollen } from "../../context/PollenContext.tsx";
 import { useState, useMemo } from "react";
 import "./PollenChart.scss";
-import Alder from "../../../public/img/tools/alder.svg";
-import Birch from "../../../public/img/tools/birch.svg";
-import Grass from "../../../public/img/tools/grass.svg";
-import Mugwort from "../../../public/img/tools/mugwort.svg";
+import Alder from "/tools/alder.svg";
+import Birch from "/tools/birch.svg";
+import Grass from "/tools/grass.svg";
+import Mugwort from "/tools/mugwort.svg";
 import {useCoordsCity} from "../../context/CoordsCityContext.tsx";
 import declineNameCity from "../../services/declineNameCity.ts";
 

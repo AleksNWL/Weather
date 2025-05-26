@@ -42,6 +42,6 @@ export default function getIconWeather(weathercode: number): WeatherInfo {
     return {
         icon: weather.icon,
         title: weather.title,
-        src: `.../../../public/img/weatherIcons/${weather.icon}.svg`
+        src: `/weatherIcons/${weather.icon}.svg`
     };
 }

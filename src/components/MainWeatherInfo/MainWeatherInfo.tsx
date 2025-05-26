@@ -1,6 +1,6 @@
-import drop from "../../../public/img/tools/drop.svg";
-import wind from "../../../public/img/tools/wind.svg";
-import pressure from "../../../public/img/tools/pressure.svg";
+import drop from "/tools/drop.svg";
+import wind from "/tools/wind.svg";
+import pressure from "/tools/pressure.svg";
 import {useWeather} from "../../context/WeatherContext.tsx";
 import "./MainWeatherInfo.scss";
 

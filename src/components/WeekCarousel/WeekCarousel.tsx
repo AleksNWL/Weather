@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Arrow from "../../../public/img/tools/arrow.svg";
+import Arrow from "/tools/arrow.svg";
 import styles from "./WeekCarousel.module.scss";
 import { useWeather } from "../../context/WeatherContext.tsx";
 import getIconWeather from "../../services/getIconWeather.ts";

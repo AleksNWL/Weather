@@ -4,7 +4,7 @@ import { useWeather } from "../../context/WeatherContext.tsx";
 import { usePollen } from "../../context/PollenContext.tsx";
 import { useCoordsCity } from "../../context/CoordsCityContext.tsx";
 import "./Search.scss";
-import search from "../../../public/img/tools/search.svg";
+import search from "/tools/search.svg";
 import { helpSearch } from "../../services/helpSearch.ts";
 import { HelpSearchType } from "../../types/helpSearch.ts";
 import { getCity } from "../../services/getCity.ts";
