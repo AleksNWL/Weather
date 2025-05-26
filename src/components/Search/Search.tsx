@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useWeather } from "../../context/WeatherContext.tsx";
 import { usePollen } from "../../context/PollenContext.tsx";
 import { useCoordsCity } from "../../context/CoordsCityContext.tsx";
-import "./Search.scss";
+import styles from "./Search.module.scss";
 import search from "/tools/search.svg";
 import { helpSearch } from "../../services/helpSearch.ts";
 import { HelpSearchType } from "../../types/helpSearch.ts";
@@ -79,23 +79,23 @@ export default function Search() {
     };
 
     return (
-        <div className="search-container">
-            <div onKeyDown={keyDownHandler} className="search-input-container">
+        <div className={styles.searchContainer}>
+            <div onKeyDown={keyDownHandler} className={styles.inputContainer}>
                 <input
                     type="text"
                     placeholder={placeHolderCity}
                     onChange={onChange}
                     value={city}
-                    className={`search-input ${suggestions.length > 0 ? "helper-on" : ""}`}
+                    className={`${styles.searchInput} ${styles[suggestions.length > 0 ? "helperOn" : ""]}`}
                 />
-                <img onClick={postCity} src={search} alt="Поиск" className="search-icon" />
+                <img onClick={postCity} src={search} alt="Поиск" className={styles.icon} />
             </div>
             {suggestions.length > 0 && (
-                <div className="search-suggestions">
+                <div className={styles.searchSuggestions}>
                     {suggestions.map((item, index) => (
                         <div
                             key={index}
-                            className="search-suggestion"
+                            className={styles.searchSuggestion}
                             onClick={() => onClickSuggestion(item.lat, item.lon, item.formatted)}
                         >
                             {item.formatted}

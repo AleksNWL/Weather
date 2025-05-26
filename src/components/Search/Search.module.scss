@@ -1,38 +1,39 @@
-.search-container {
+.searchContainer {
   width: 100%;
   max-width: 600px;
   position: relative;
 }
 
-.search-input {
+.inputContainer {
+  position: relative;
   width: 100%;
+  max-width: 600px;
+}
+
+.searchInput {
+  width: 100%;
+  min-width: 600px;
   padding: 0.5rem 2.5rem;
   box-sizing: border-box;
   text-align: center;
   border: none;
   font-size: 1rem;
-  border-radius: 1.5rem;
+  border-radius: 20px;
   background-color: var(--color-secondary-bg);
   color: var(--color-secondary-text);
   box-shadow: var(--color-shadow);
 }
 
-.search-input:focus {
+.searchInput:focus {
   color: var(--color-primary-text);
 }
 
-.search-input-container {
-  position: relative;
-  width: 100%;
-  max-width: 600px;
-}
-
-.helper-on {
+.helperOn {
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
 
-.search-icon {
+.icon {
   opacity: 0.7;
   position: absolute;
   top: 50%;
@@ -40,12 +41,12 @@
   transform: translateY(-50%);
 }
 
-.search-icon:hover {
+.icon:hover {
   cursor: pointer;
   opacity: 0.5;
 }
 
-.search-suggestions {
+.searchSuggestions {
   position: absolute;
   max-width: 600px;
   width: 100%;
@@ -59,7 +60,7 @@
   box-shadow: var(--color-shadow);
 }
 
-.search-suggestion {
+.searchSuggestion {
   padding: 0.25rem;
   border-radius: 10px;
   background-color: var(--color-primary-bg);
@@ -67,10 +68,23 @@
   font-size: 0.75rem;
 }
 
-.search-suggestion:hover {
+.searchSuggestion:hover {
   cursor: pointer;
 }
 
-.search-suggestion:active {
+.searchSuggestion:active {
   opacity: 0.8;
+}
+
+@media (max-width: 780px) {
+  .searchInput {
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchInput {
+    border-radius: 10px;
+    min-width: 200px;
+  }
 }

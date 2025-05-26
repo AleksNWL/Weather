@@ -2,9 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 5rem;
+  padding-top: 40px;
 }
 
 .search {
+  align-self: center;
 }
 
 .mainWeather {
