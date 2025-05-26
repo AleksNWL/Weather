@@ -1,0 +1,113 @@
+.heading {
+
+}
+
+.containerPollen {
+  display: flex;
+  gap: 20px;
+}
+
+.containerFullSelection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.nowDay {
+  font-weight: 600;
+}
+
+.containerSelection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.choice {
+  display: flex;
+  max-width: 70px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  border-radius: 5px;
+  background-color: #009DFF;
+  cursor: pointer;
+}
+
+.choice:active {
+  background-color: rgba(0, 157, 255, 0.5);
+}
+
+.choiceLabel {
+  font-weight: 400;
+  padding-bottom: 2px;
+}
+
+.containerImage {
+  display: flex;
+  gap: 4px;
+}
+
+.containerLevel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 32px;
+  height: 100%;
+}
+
+.containerPollenBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #009DFF;
+  padding: 8px;
+  position: relative;
+  border-radius: 10px;
+}
+
+.barLabel {}
+
+.containerBar {
+  display: flex;
+  gap: 8px;
+}
+
+.setData {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.levelPost {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.weekday {}
+
+.high, .middle, .low {
+  border-radius: 5px;
+  height: 6.5px;
+  background-color: #4A5781;
+}
+
+.high {width: 100%;}
+.middle {width: 75%;}
+.low {width: 50%;}
+
+.red {background-color: #FF6C36;}
+.yellow {background-color: #FFDA36;}
+.green {background-color: #9EFF36;}
+
+.stripe {
+  position: absolute;
+  left: 6px;
+  bottom: 26px;
+  width: 92%;
+  height: 3px;
+  border-radius: 15px;
+  background-color: #ffffff;
+}

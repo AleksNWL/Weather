@@ -115,7 +115,7 @@ export default function Horoscope() {
                     className={styles.selector}
                     value={sign}
                     onChange={handleSelect}
-                    aria-label="Выбой"
+                    aria-label="Выбор"
                 >
                     {zodiacSigns.map(({ sign: s, label, icon }) => (
                         <option key={s} value={s}>

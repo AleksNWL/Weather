@@ -15,7 +15,6 @@ import { useWeather } from "../../context/WeatherContext.tsx";
 import {usePollen} from "../../context/PollenContext.tsx";
 import YesterdayWeather from "../../components/YesterweekWeather/YesterdayWeather.tsx";
 import MagneticStorm from "../../components/MagneticStorm/MagneticStorm.tsx";
-import declineNameCity from "../../services/declineNameCity.ts";
 import Visibility from "../../components/Visibility/Visibility.tsx";
 import MoonPhases from "../../components/PhasesMoon/PhasesMoon.tsx";
 import UVIndex from "../../components/UVIndex/UVIndex.tsx";
@@ -23,7 +22,7 @@ import Horoscope from "../../components/Horoscope/Horoscope.tsx";
 
 
 export default function Home() {
-    const { setCity, setCoordinate, city } = useCoordsCity();
+    const { setCity, setCoordinate } = useCoordsCity();
     const { setCoordinates } = useWeather();
     const { setCoords } = usePollen();
 
@@ -70,9 +69,8 @@ export default function Home() {
                 <DailyCarousel />
             </div>
 
-            <div className={styles.additionalContainer}>
+            <div className={styles.additionalContainer} style={{height: "100%"}} >
                 <div className={styles.middleContainer}>
-                    <span className={styles.heading}>Неделю назад в этот день</span>
                     <YesterdayWeather/>
                 </div>
 
@@ -86,7 +84,6 @@ export default function Home() {
                 </div>
 
                 <div className={styles.highContainer}>
-                    <span className={styles.heading}>Активность пыльцы в {declineNameCity(city)}</span>
                     <PollenChart />
                 </div>
             </div>

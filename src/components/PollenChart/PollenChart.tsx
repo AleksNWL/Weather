@@ -1,10 +1,12 @@
 import { usePollen } from "../../context/PollenContext.tsx";
 import { useState, useMemo } from "react";
-import "./PollenChart.scss";
+import styles from "./PollenChart.module.scss";
 import Alder from "/tools/alder.svg";
 import Birch from "/tools/birch.svg";
 import Grass from "/tools/grass.svg";
 import Mugwort from "/tools/mugwort.svg";
+import declineNameCity from "../../services/declineNameCity.ts";
+import {useCoordsCity} from "../../context/CoordsCityContext.tsx";
 
 
 type NormalizedPollenKey = "birchPollen" | "alderPollen" | "grassPollen" | "mugwortPollen";
@@ -49,6 +51,7 @@ const getColor = (level: number): string => {
 export function PollenChart() {
     const { pollen } = usePollen();
     const [choice, setChoice] = useState<NormalizedPollenKey>("birchPollen");
+    const { city } = useCoordsCity();
 
     const groupedData = useMemo<PollenGroupedData | null>(() => {
         if (!pollen) return null;
@@ -130,20 +133,21 @@ export function PollenChart() {
     const selectedPollen = pollenOptions.find(t => t.key === choice);
 
     return (
-        <div>
-            <div className="pollen-container-chart">
-                <div className="pollen-mini-container">
-                    <p>Сегодня</p>
-                    <div className="pollen-choices">
+        <>
+            <span className={styles.heading}>Активность пыльцы в {declineNameCity(city)}</span>
+            <div className={styles.containerPollen}>
+                <div className={styles.containerFullSelection}>
+                    <span className={styles.nowDay}>Сегодня</span>
+                    <div className={styles.containerSelection}>
                         {pollenOptions.map(({ key, label, img }) => (
-                            <div key={key} className="pollen-choice" onClick={() => setChoice(key)}>
-                                <p>{label}</p>
-                                <div className="container-choice">
-                                    <img src={img} alt={label} />
-                                    <div className="pollen-level">
-                                        <div className={`high ${todayLevels[key] > 6 ? "red" : ""}`} />
-                                        <div className={`middle ${todayLevels[key] > 3 ? "yellow" : ""}`} />
-                                        <div className={`low ${todayLevels[key] > 0 ? "green" : ""}`} />
+                            <div key={key} onClick={() => setChoice(key)} className={styles.choice}>
+                                <p className={styles.choiceLabel}>{label}</p>
+                                <div className={styles.containerImage}>
+                                    <img src={img} alt={label} className={styles.image} />
+                                    <div className={styles.containerLevel}>
+                                        <div className={`${styles.high} ${todayLevels[key] > 6 ? styles.red : ""}`} />
+                                        <div className={`${styles.middle} ${todayLevels[key] > 3 ? styles.yellow : ""}`} />
+                                        <div className={`${styles.low} ${todayLevels[key] > 0 ? styles.green : ""}`} />
                                     </div>
                                 </div>
                             </div>
@@ -151,26 +155,25 @@ export function PollenChart() {
                     </div>
                 </div>
 
-                <div className="bar-background">
-                    <p>{selectedPollen?.label}</p>
-                    <div className="custom-bar-chart">
+                <div className={styles.containerPollenBar}>
+                    <p className={styles.barLabel}>{selectedPollen?.label}</p>
+                    <div className={styles.containerBar}>
                         {chartValues.map((entry, i) => (
-                            <div className="bar-wrapper" key={i}>
-                                <div
-                                    className="bar"
-                                    style={{
-                                        height: `${entry.value === 0 ? 0 : 8 * entry.value}px`,
-                                        width: "20px",
-                                        backgroundColor: getColor(entry.value)
-                                    }}
+                            <div key={i} className={styles.setData}>
+                                <div style={{
+                                    height: `${entry.value === 0 ? 0 : 8 * entry.value}px`,
+                                    width: "20px",
+                                    backgroundColor: getColor(entry.value)
+                                }}
+                                     className={styles.levelPost}
                                 />
-                                <span className="bar-label">{entry.label}</span>
+                                <span className={styles.weekday}>{entry.label}</span>
                             </div>
                         ))}
+                        <div className={styles.stripe}></div>
                     </div>
-                    <div className="ok"></div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
