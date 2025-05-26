@@ -76,7 +76,6 @@ export function AqiSemiCircle({ maxAQI = 150 }) {
 
     return (
         <div style={{ textAlign: "center" }}>
-            <span style={{ fontWeight: "bold" }}>Качество воздуха</span>
             <canvas ref={canvasRef} width={300} height={140} />
             {aqi !== null ? (
                 <>

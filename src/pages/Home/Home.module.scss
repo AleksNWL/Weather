@@ -1,0 +1,81 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+}
+
+.search {
+}
+
+.mainWeather {
+}
+
+.mainTemperature {
+}
+
+.mainWeatherInfo {
+  display: flex;
+}
+
+.dailyContainer {
+  background-color: var(--color-secondary-bg);
+  border-radius: 10px;
+
+}
+
+.additionalContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.twoContainer {
+  display: flex;
+}
+
+.littleContainer {
+  padding: 10px 12px;
+  width: 100%;
+  max-width: 200px;
+  height: 200px;
+  background-color: var(--color-secondary-bg);
+  border-radius: 10px;
+}
+
+.middleContainer {
+  padding: 10px 12px;
+  width: 100%;
+  max-width: 325px;
+  height: 200px;
+  background-color: var(--color-secondary-bg);
+  border-radius: 10px;
+}
+
+.highContainer {
+  padding: 10px 12px;
+  width: 100%;
+  max-width: 350px;
+  height: 200px;
+  background-color: var(--color-secondary-bg);
+  border-radius: 10px;
+}
+
+.weeklyContainer {
+  padding: 10px 12px;
+  background-color: var(--color-secondary-bg);
+  border-radius: 10px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--color-secondary-bg);
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+
+.heading {
+  font-weight: 700;
+}

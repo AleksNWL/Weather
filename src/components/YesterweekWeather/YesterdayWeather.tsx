@@ -40,7 +40,6 @@ export default function YesterdayWeather() {
 
     return (
         <div>
-            <h3>Погода вчера в это же время:</h3>
             <div>
                 <img src={thermometer} alt="thermometer" />
                 <span>{yesterweekWeather.temperature_2m}°C</span>

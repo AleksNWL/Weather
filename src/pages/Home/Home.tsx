@@ -4,7 +4,7 @@ import { getCity } from "../../services/getCity.ts";
 import { useCoordsCity } from "../../context/CoordsCityContext.tsx";
 import MainTemperature from "../../components/MainTemperature/MainTemperature.tsx";
 import DailyCarousel from "../../components/DailyCarousel/DailyCarousel.tsx";
-import "./Home.scss";
+import styles from "./Home.module.scss";
 import MainWeatherInfo from "../../components/MainWeatherInfo/MainWeatherInfo.tsx";
 import SearcherPrecipitation from "../../components/SearcherPrecipitation/SearcherPrecipitation.tsx";
 import Footer from "../../components/Footer/Footer.tsx";
@@ -15,10 +15,12 @@ import { useWeather } from "../../context/WeatherContext.tsx";
 import {usePollen} from "../../context/PollenContext.tsx";
 import YesterdayWeather from "../../components/YesterweekWeather/YesterdayWeather.tsx";
 import MagneticStorm from "../../components/MagneticStorm/MagneticStorm.tsx";
+import declineNameCity from "../../services/declineNameCity.ts";
+import Visibility from "../../components/Visibility/Visibility.tsx";
 
 
 export default function Home() {
-    const { setCity, setCoordinate } = useCoordsCity();
+    const { setCity, setCoordinate, city } = useCoordsCity();
     const { setCoordinates } = useWeather();
     const { setCoords } = usePollen();
 
@@ -41,40 +43,78 @@ export default function Home() {
                 });
             }
         });
-    }, []);
+    });
 
 
 
     return (
-        <>
-            <div className="main-container">
+        <div className={styles.mainContainer}>
+            <div className={styles.search}>
                 <Search />
-                <div className="main-weather-container">
-                    <div className="mini-container">
-                        <MainTemperature />
-                        <SearcherPrecipitation />
-                    </div>
+            </div>
+
+            <div className={styles.mainWeather}>
+                <div className={styles.mainTemperature}>
+                    <MainTemperature />
+                    <SearcherPrecipitation />
+                </div>
+                <div className={styles.mainWeatherInfo}>
                     <MainWeatherInfo />
                 </div>
+            </div>
+
+            <div className={styles.dailyContainer}>
                 <DailyCarousel />
-                <div className="addition-container">
-                    <div className="pollen-container">
-                        <PollenChart />
-                    </div>
-                    <div className="pollen-container">a</div>
+            </div>
+
+            <div className={styles.additionalContainer}>
+                <div className={styles.middleContainer}>
+                    <span className={styles.heading}>Неделю назад в этот день</span>
+                    <YesterdayWeather/>
                 </div>
-                <div className="week-carousel-container">
-                    <WeekCarousel />
+
+                <div className={styles.littleContainer}>
+                    <span className={styles.heading}>Качество воздуха</span>
+                    <AqiSemiCircle/>
                 </div>
-                <div className="aqi-container">
-                    <AqiSemiCircle />
+                <div className={styles.littleContainer}>
+                    <span className={styles.heading}>UV-индекс</span>
+                    <div>UV-INDEX</div>
                 </div>
-                <div className="magnetic-container">
-                    <MagneticStorm/>
+
+                <div className={styles.highContainer}>
+                    <span className={styles.heading}>Активность пыльцы в {declineNameCity(city)}</span>
+                    <PollenChart />
                 </div>
             </div>
-            <YesterdayWeather/>
-            <Footer />
-        </>
+
+            <div className={styles.weeklyContainer}>
+                <WeekCarousel />
+            </div>
+
+            <div className={styles.additionalContainer}>
+
+                <div className={styles.littleContainer}>
+                    <span className={styles.heading}>Магнитное поле</span>
+                    <MagneticStorm/>
+                </div>
+                <div className={styles.littleContainer}>
+                    <span className={styles.heading}>Фаза луны</span>
+                    <div>Phases Moon</div>
+                </div>
+
+                <div className={styles.middleContainer}>
+                    <span className={styles.heading}>Видимость на дорогах</span>
+                    <Visibility/>
+                </div>
+                <div className={styles.highContainer}>
+                    <span className={styles.heading}>Гороскоп на сегодня</span>
+                    <div>Horoscope</div>
+                </div>
+            </div>
+            <footer className={styles.footer}>
+                <Footer />
+            </footer>
+        </div>
     );
 }

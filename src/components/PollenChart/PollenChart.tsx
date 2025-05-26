@@ -5,8 +5,6 @@ import Alder from "/tools/alder.svg";
 import Birch from "/tools/birch.svg";
 import Grass from "/tools/grass.svg";
 import Mugwort from "/tools/mugwort.svg";
-import {useCoordsCity} from "../../context/CoordsCityContext.tsx";
-import declineNameCity from "../../services/declineNameCity.ts";
 
 
 type NormalizedPollenKey = "birchPollen" | "alderPollen" | "grassPollen" | "mugwortPollen";
@@ -51,7 +49,6 @@ const getColor = (level: number): string => {
 export function PollenChart() {
     const { pollen } = usePollen();
     const [choice, setChoice] = useState<NormalizedPollenKey>("birchPollen");
-    const { city } = useCoordsCity();
 
     const groupedData = useMemo<PollenGroupedData | null>(() => {
         if (!pollen) return null;
@@ -134,7 +131,6 @@ export function PollenChart() {
 
     return (
         <div>
-            <h2 style={{fontSize:"1.2rem"}}>Активность пыльцы в {declineNameCity(city)}</h2>
             <div className="pollen-container-chart">
                 <div className="pollen-mini-container">
                     <p>Сегодня</p>
