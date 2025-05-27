@@ -138,25 +138,29 @@ export default function Like() {
             </div>
 
             {showPopup && (
-                <div className={styles.popup}>
-                    <p className={styles.heading}>Избранное место</p>
-                    <input
-                        type="text"
-                        value={customName}
-                        onChange={(e) => setCustomName(e.target.value)}
-                        placeholder={city || "Текущее местоположение"}
-                        className={styles.popupInput}
-                    />
-                    <div className={styles.buttonGroup}>
-                        <button onClick={saveLocation} className={styles.saveButton}>
-                            Сохранить
-                        </button>
-                        <button onClick={saveDefaultLocation} className={styles.saveButton}>
-                            По умолчанию
-                        </button>
+                <div className={styles.overlay} onClick={() => setShowPopup(false)}>
+                    <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
+                        <button className={styles.closeButton} onClick={() => setShowPopup(false)}>×</button>
+                        <p className={styles.heading}>Избранное место</p>
+                        <input
+                            type="text"
+                            value={customName}
+                            onChange={(e) => setCustomName(e.target.value)}
+                            placeholder={city || "Текущее местоположение"}
+                            className={styles.popupInput}
+                        />
+                        <div className={styles.buttonGroup}>
+                            <button onClick={saveLocation} className={styles.saveButton}>
+                                Сохранить
+                            </button>
+                            <button onClick={saveDefaultLocation} className={styles.saveButton}>
+                                По умолчанию
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
+
 
         </>
     );

@@ -94,13 +94,6 @@ export default function Home() {
                 <div className={styles.highContainer}>
                     <PollenChart />
                 </div>
-            </div>
-
-            <div className={styles.weeklyContainer}>
-                <WeekCarousel />
-            </div>
-
-            <div className={styles.additionalContainer}>
 
                 <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
                     <span className={styles.heading}>Магнитное поле</span>
@@ -119,6 +112,11 @@ export default function Home() {
                     <Horoscope/>
                 </div>
             </div>
+
+            <div className={styles.weeklyContainer}>
+                <WeekCarousel />
+            </div>
+
             <footer className={styles.footer}>
                 <Footer />
             </footer>

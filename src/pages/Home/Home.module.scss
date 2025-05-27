@@ -45,8 +45,11 @@
 
 .additionalContainer {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-around;
 }
+
 
 .twoContainer {
   display: flex;
@@ -63,8 +66,7 @@
 
 .middleContainer {
   padding: 10px 12px;
-  width: 100%;
-  max-width: 325px;
+  width: 325px;
   height: 200px;
   background-color: var(--color-secondary-bg);
   border-radius: 10px;
@@ -78,8 +80,7 @@
 
 .highContainer {
   padding: 10px 12px;
-  width: 100%;
-  max-width: 350px;
+  width: 350px;
   max-height: 200px;
   background-color: var(--color-secondary-bg);
   border-radius: 10px;
@@ -112,3 +113,8 @@
   font-weight: 700;
 }
 
+@media (max-width: 1280px) {
+  .likeContainer {
+    gap: 20px;
+  }
+}
