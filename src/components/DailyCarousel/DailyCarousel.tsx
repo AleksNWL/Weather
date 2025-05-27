@@ -36,6 +36,22 @@ export default function DailyCarousel() {
         carouselRef.current.scrollLeft = scrollLeft - walk;
     }
 
+    const handleTouchStart = (e: React.TouchEvent) => {
+        if (!carouselRef.current) return;
+        setIsDragging(true);
+        setStartX(e.touches[0].pageX - carouselRef.current.offsetLeft);
+        setScrollLeft(carouselRef.current.scrollLeft);
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        if (!carouselRef.current || !isDragging) return;
+        const x = e.touches[0].pageX - carouselRef.current.offsetLeft;
+        const walk = (x - startX) * 2;
+        carouselRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleTouchEnd = () => setIsDragging(false);
+
 
     return (
         <div
@@ -45,8 +61,12 @@ export default function DailyCarousel() {
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
         >
-            <div className="container-carousel__scroll">
+
+        <div className="container-carousel__scroll">
                 <div className="container-carousel__item">
                     <span>Сейчас</span>
                     <div>
