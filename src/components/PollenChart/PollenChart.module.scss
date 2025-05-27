@@ -32,12 +32,12 @@
   align-items: center;
   padding: 4px;
   border-radius: 5px;
-  background-color: #009DFF;
+  background-color: var(--color-third-bg);
   cursor: pointer;
 }
 
 .choice:active {
-  background-color: rgba(0, 157, 255, 0.5);
+  background-color: var(--color-hover);
 }
 
 .choiceLabel {
@@ -62,7 +62,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #009DFF;
+  background-color: var(--color-third-bg);
   padding: 8px;
   position: relative;
   border-radius: 10px;
@@ -91,7 +91,7 @@
 .high, .middle, .low {
   border-radius: 5px;
   height: 6.5px;
-  background-color: #4A5781;
+  background-color: var(--color-stick);
 }
 
 .high {width: 100%;}

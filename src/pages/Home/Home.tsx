@@ -19,6 +19,7 @@ import Visibility from "../../components/Visibility/Visibility.tsx";
 import MoonPhases from "../../components/PhasesMoon/PhasesMoon.tsx";
 import UVIndex from "../../components/UVIndex/UVIndex.tsx";
 import Horoscope from "../../components/Horoscope/Horoscope.tsx";
+import ToggleTheme from "../../components/ToggleTheme/ToggleTheme.tsx";
 
 
 export default function Home() {
@@ -51,6 +52,9 @@ export default function Home() {
 
     return (
         <div className={styles.mainContainer}>
+            <div>
+                <ToggleTheme/>
+            </div>
             <div className={styles.search}>
                 <Search />
             </div>

@@ -28,7 +28,7 @@ export const getAirData = async (coordinates: CoordinatesTypes) => {
         const { data } = await axios.get(endpoint, { params });
         const result = {
             aqi: data.current?.us_aqi ?? null,
-            uv: data.current?.uv_index ?? null,
+            uv: Math.round(data.current?.uv_index) ?? null,
         };
 
         localStorage.setItem(CACHE_KEY, JSON.stringify({
