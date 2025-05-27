@@ -1,12 +1,18 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 60px;
   padding-top: 40px;
 }
 
 .search {
-  align-self: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.likeContainer {
+  display: flex;
+  gap: 32px;
 }
 
 .mainWeather {
@@ -35,7 +41,6 @@
 .dailyContainer {
   background-color: var(--color-secondary-bg);
   border-radius: 10px;
-
 }
 
 .additionalContainer {

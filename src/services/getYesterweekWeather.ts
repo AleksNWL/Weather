@@ -4,12 +4,20 @@ import { CoordinatesTypes } from "../types/coordinatesTypes.ts";
 export const getLastWeekWeatherAtSameTime = async (coordinates: CoordinatesTypes) => {
     if (!coordinates) return;
 
-    const now = new Date();
-    const lastWeek = new Date(now);
-    lastWeek.setDate(now.getDate() - 7);
+    const cacheKey = `lastWeekWeather_${coordinates.latitude}_${coordinates.longitude}`;
+    const cached = localStorage.getItem(cacheKey);
+    const now = Date.now();
+    const CACHE_TTL = 10 * 60 * 1000;
 
-    const dateStr = lastWeek.toISOString().split("T")[0];
-    const hour = now.getHours();
+    if (cached) {
+        const { timestamp, data } = JSON.parse(cached);
+        if (now - timestamp < CACHE_TTL) return data;
+    }
+
+    const date = new Date();
+    date.setDate(date.getDate() - 7);
+    const dateStr = date.toISOString().split("T")[0];
+    const hour = new Date().getHours();
 
     const endpoint = 'https://archive-api.open-meteo.com/v1/archive';
     const params = {
@@ -24,21 +32,8 @@ export const getLastWeekWeatherAtSameTime = async (coordinates: CoordinatesTypes
     try {
         const { data } = await axios.get(endpoint, { params });
 
-        if (!data.hourly || !data.hourly.time) {
-            console.warn("Данные не содержат почасовых значений");
-            return null;
-        }
-
-        const index = data.hourly.time.findIndex((t: string) => {
-            const date = new Date(t);
-            console.log(data)
-            return date.getHours() === hour;
-        });
-
-        if (index === -1) {
-            console.warn("Не найден нужный час в данных");
-            return null;
-        }
+        const index = data.hourly?.time?.findIndex((t: string) => new Date(t).getHours() === hour);
+        if (index === -1 || !data.hourly) return null;
 
         const result = {
             temperature_2m: data.hourly.temperature_2m?.[index],
@@ -48,11 +43,12 @@ export const getLastWeekWeatherAtSameTime = async (coordinates: CoordinatesTypes
             relative_humidity_2m: data.hourly.relative_humidity_2m?.[index],
             windspeed: data.hourly.windspeed?.[index],
         };
-        console.log(result);
-        return result;
 
+        localStorage.setItem(cacheKey, JSON.stringify({ timestamp: now, data: result }));
+        return result;
     } catch (error) {
         console.error("Ошибка при получении архивных данных:", error);
         return null;
     }
 };
+

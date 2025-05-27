@@ -20,6 +20,8 @@ import MoonPhases from "../../components/PhasesMoon/PhasesMoon.tsx";
 import UVIndex from "../../components/UVIndex/UVIndex.tsx";
 import Horoscope from "../../components/Horoscope/Horoscope.tsx";
 import ToggleTheme from "../../components/ToggleTheme/ToggleTheme.tsx";
+import Like from "../../components/Like/Like.tsx";
+import FavoritesList from "../../components/FavoritesList/FavoritesList.tsx";
 
 
 export default function Home() {
@@ -52,11 +54,13 @@ export default function Home() {
 
     return (
         <div className={styles.mainContainer}>
-            <div>
-                <ToggleTheme/>
-            </div>
             <div className={styles.search}>
+                <div className={styles.likeContainer}>
+                    <Like/>
+                    <FavoritesList/>
+                </div>
                 <Search />
+                <ToggleTheme/>
             </div>
 
             <div className={styles.mainWeather}>

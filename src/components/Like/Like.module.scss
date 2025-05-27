@@ -1,0 +1,53 @@
+.popup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  box-shadow: var(--color-shadow);
+  z-index: 1000;
+  background-color: var(--color-secondary-bg);
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.heading {
+  font-size: 20px;
+  font-weight: bold;
+  align-self: center;
+}
+
+.popupInput {
+  background-color: var(--color-third-bg);
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  color: #FFFFFF;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 16px;
+}
+
+.saveButton {
+  padding: 10px 16px;
+  background-color: var(--color-primary-bg);
+  box-shadow: var(--color-shadow);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+.likeOn {
+  color: var(--color-third-bg);
+}
+
+.likeOff {
+  color: var(--color-third-bg);
+}
