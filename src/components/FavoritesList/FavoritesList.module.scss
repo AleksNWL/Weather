@@ -14,6 +14,7 @@
   padding: 8px;
   position: absolute;
   box-shadow: var(--color-shadow);
+  z-index: 9999;
 }
 
 .favoritesList::-webkit-scrollbar {

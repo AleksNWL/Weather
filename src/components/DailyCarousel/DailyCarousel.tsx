@@ -1,9 +1,8 @@
 import { useWeather } from "../../context/WeatherContext.tsx";
-import { getAllDay } from "../../services/getAllDay.ts"
-import "./DailyCarousel.scss"
+import { getAllDay } from "../../services/getAllDay.ts";
 import getIconWeather from "../../services/getIconWeather.ts";
-import {useRef, useState} from "react";
-
+import { useRef, useState } from "react";
+import styles from "./DailyCarousel.module.scss";
 
 export default function DailyCarousel() {
     const { weather } = useWeather();
@@ -17,13 +16,12 @@ export default function DailyCarousel() {
     const hourly = getAllDay(weather.hourly);
     const weatherInfoNow = getIconWeather(weather.current_weather.weathercode);
 
-
     const handleMouseDown = (e: React.MouseEvent) => {
         if (!carouselRef.current) return;
         setIsDragging(true);
         setStartX(e.pageX - carouselRef.current.offsetLeft);
         setScrollLeft(carouselRef.current.scrollLeft);
-    }
+    };
 
     const handleMouseUp = () => setIsDragging(false);
     const handleMouseLeave = () => setIsDragging(false);
@@ -34,7 +32,7 @@ export default function DailyCarousel() {
         const x = e.pageX - carouselRef.current.offsetLeft;
         const walk = (x - startX) * 2;
         carouselRef.current.scrollLeft = scrollLeft - walk;
-    }
+    };
 
     const handleTouchStart = (e: React.TouchEvent) => {
         if (!carouselRef.current) return;
@@ -52,11 +50,10 @@ export default function DailyCarousel() {
 
     const handleTouchEnd = () => setIsDragging(false);
 
-
     return (
         <div
             ref={carouselRef}
-            className="container-carousel"
+            className={styles["container-carousel"]}
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
@@ -65,14 +62,11 @@ export default function DailyCarousel() {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
         >
-
-        <div className="container-carousel__scroll">
-                <div className="container-carousel__item">
-                    <span>Сейчас</span>
-                    <div>
-                        <img src={weatherInfoNow.src} alt={weatherInfoNow.icon} />
-                    </div>
-                    <span>{Math.round(weather.current_weather.temperature)}°C</span>
+            <div className={styles["container-carousel__scroll"]}>
+                <div className={styles["container-carousel__item"]}>
+                    <span className={styles.name}>Сейчас</span>
+                    <img src={weatherInfoNow.src} alt={weatherInfoNow.icon} className={styles.image} />
+                    <span className={styles.temperature}>{Math.round(weather.current_weather.temperature)}°C</span>
                 </div>
                 {hourly.time.map((time, i) => {
                     const weatherInfo = getIconWeather(hourly.weathercode[i]);
@@ -80,28 +74,29 @@ export default function DailyCarousel() {
 
                     if (formattedTime.startsWith("00")) {
                         return (
-                            <div key={time} className="container-carousel__item-zero">
-                                <div className="container-new-day">
-                                    <div className="new-day__line"></div>
-                                    <div className="new-day__date">{new Date(time).toLocaleDateString([], { weekday: "short", day: "2-digit" })}</div>
-                                </div>
-                                <div className="container-carousel__item">
-                                    <span>{formattedTime}</span>
-                                    <div>
-                                        <img src={weatherInfo.src} alt={weatherInfo.icon} />
+                            <div key={time} className={styles["container-carousel__item-zero"]}>
+                                <div className={styles["container-new-day"]}>
+                                    <div className={styles["new-day__line"]}></div>
+                                    <div className={styles["new-day__date"]}>
+                                        {new Date(time).toLocaleDateString([], {
+                                            weekday: "short",
+                                            day: "2-digit"
+                                        })}
                                     </div>
-                                    <span>{Math.round(hourly.temperature_2m[i])}°C</span>
+                                </div>
+                                <div className={styles["container-carousel__item"]}>
+                                    <span className={styles.name}>{formattedTime}</span>
+                                    <img src={weatherInfo.src} alt={weatherInfo.icon} className={styles.image} />
+                                    <span className={styles.temperature}>{Math.round(hourly.temperature_2m[i])}°C</span>
                                 </div>
                             </div>
                         );
                     } else {
                         return (
-                            <div key={time} className="container-carousel__item">
-                                <span>{formattedTime}</span>
-                                <div>
-                                    <img src={weatherInfo.src} alt={weatherInfo.icon} />
-                                </div>
-                                <span>{Math.round(hourly.temperature_2m[i])}°C</span>
+                            <div key={time} className={styles["container-carousel__item"]}>
+                                <span className={styles.name}>{formattedTime}</span>
+                                <img src={weatherInfo.src} alt={weatherInfo.icon} className={styles.image} />
+                                <span className={styles.temperature}>{Math.round(hourly.temperature_2m[i])}°C</span>
                             </div>
                         );
                     }
@@ -109,5 +104,4 @@ export default function DailyCarousel() {
             </div>
         </div>
     );
-
 }

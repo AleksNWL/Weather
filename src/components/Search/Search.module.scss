@@ -96,14 +96,14 @@
 
 @media (max-width: 1080px) {
   .searchContainer {
-    max-width: 320px;
+    max-width: 600px;
   }
   .searchInput {
-    max-width: 320px;
+    max-width: 600px;
     font-size: 18px;
   }
   .inputContainer {
-    max-width: 320px;
+    max-width: 600px;
   }
   .icon {
     width: 20px;
@@ -112,7 +112,7 @@
 
 @media (max-width: 480px) {
   .searchInput {
-    border-radius: 10px;
+    border-radius: 20px;
     min-width: 200px;
   }
 }

@@ -5,6 +5,12 @@
   padding-top: 40px;
 }
 
+.helpContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .search {
   display: flex;
   justify-content: space-around;
@@ -66,7 +72,7 @@
 
 .middleContainer {
   padding: 10px 12px;
-  width: 325px;
+  width: 350px;
   height: 200px;
   background-color: var(--color-secondary-bg);
   border-radius: 10px;
@@ -81,7 +87,7 @@
 .highContainer {
   padding: 10px 12px;
   width: 350px;
-  max-height: 200px;
+  height: 200px;
   background-color: var(--color-secondary-bg);
   border-radius: 10px;
   justify-content: space-between;
@@ -116,5 +122,27 @@
 @media (max-width: 1280px) {
   .likeContainer {
     gap: 20px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .search {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 780px) {
+  .mainWeather {
+    flex-direction: column;
+  }
+  .mainWeatherInfo {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 780px;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 }
