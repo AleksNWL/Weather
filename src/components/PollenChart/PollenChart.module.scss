@@ -7,6 +7,12 @@
   gap: 20px;
 }
 
+@media (max-width: 500px) {
+  .containerPollen {
+    flex-direction: column;
+  }
+}
+
 .containerFullSelection {
   display: flex;
   flex-direction: column;
@@ -72,6 +78,7 @@
 
 .containerBar {
   display: flex;
+  justify-content: space-evenly;
   gap: 8px;
 }
 
@@ -84,9 +91,8 @@
 .levelPost {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+  align-self: center;
 }
-
-.weekday {}
 
 .high, .middle, .low {
   border-radius: 5px;
@@ -106,8 +112,17 @@
   position: absolute;
   left: 6px;
   bottom: 26px;
-  width: 92%;
+  width: 95%;
   height: 3px;
   border-radius: 15px;
   background-color: #ffffff;
+}
+
+@media (max-width: 500px) {
+  .choice {
+    width: 60px;
+  }
+  .containerBar {
+    height: 100px;
+  }
 }

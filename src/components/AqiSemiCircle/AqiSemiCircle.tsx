@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { getAirData } from "../../services/getAir.ts";  // переименуй импорт если хочешь
+import { getAirData } from "../../services/getAir.ts";
 import { useCoordsCity } from "../../context/CoordsCityContext.tsx";
+import styles from "./AqiSemiCircle.module.scss";
+import { Skeleton } from "@mui/material";
 
 const getAQIColor = (aqi: number): string => {
     if (aqi <= 20) return "#00e400";
@@ -76,15 +78,18 @@ export function AqiSemiCircle({ maxAQI = 150 }) {
     }, [aqi, maxAQI]);
 
     return (
-        <div style={{ textAlign: "center" }}>
+        <div className={styles.container}>
             <canvas ref={canvasRef} width={300} height={140} />
             {aqi !== null ? (
                 <>
-                    <div style={{ fontSize: "1.2rem", fontWeight: "bold" }}>AQI: {aqi}</div>
-                    <div style={{ color: getAQIColor(aqi), fontSize: "16px", fontWeight: "800" }}>{getAQIText(aqi)}</div>
+                    <div className={styles.name}>AQI: {aqi}</div>
+                    <div style={{ color: getAQIColor(aqi) }} className={styles.aqi}>{getAQIText(aqi)}</div>
                 </>
             ) : (
-                <div>Нет данных AQI</div>
+                <>
+                    <Skeleton variant="text" width={80} height={30} style={{ margin: "0 auto" }} />
+                    <Skeleton variant="text" width={120} height={25} style={{ margin: "0 auto", marginTop: 8 }} />
+                </>
             )}
         </div>
     );

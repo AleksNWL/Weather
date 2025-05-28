@@ -1,6 +1,7 @@
 import styles from "./Horoscope.module.scss";
 import { useEffect, useState } from "react";
 import getHoroscope from "../../services/getHoroscope";
+import { Skeleton } from "@mui/material";  // импортируем Skeleton
 
 const zodiacSigns = [
     { sign: "aries", label: "Овен", icon: "♈️" },
@@ -20,6 +21,7 @@ const zodiacSigns = [
 export default function Horoscope() {
     const [sign, setSign] = useState(() => localStorage.getItem("selectedSign") || "leo");
     const [horoscope, setHoroscope] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const CACHE_KEY = `horoscope_${sign}`;
     const CACHE_EXP_KEY = `${CACHE_KEY}_expiry`;
@@ -56,12 +58,14 @@ export default function Horoscope() {
     useEffect(() => {
         const fetchAndTranslateHoroscope = async () => {
             try {
+                setLoading(true);
                 const cachedData = localStorage.getItem(CACHE_KEY);
                 const expiry = localStorage.getItem(CACHE_EXP_KEY);
                 const now = Date.now();
 
                 if (cachedData && expiry && now < +expiry) {
                     setHoroscope(cachedData);
+                    setLoading(false);
                     return;
                 }
 
@@ -94,6 +98,8 @@ export default function Horoscope() {
             } catch (error) {
                 console.error("Ошибка в fetchAndTranslateHoroscope:", error);
                 setHoroscope("Гороскоп недоступен.");
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -105,7 +111,6 @@ export default function Horoscope() {
         setSign(newSign);
         localStorage.setItem("selectedSign", newSign);
     };
-
 
     return (
         <>
@@ -125,7 +130,11 @@ export default function Horoscope() {
                 </select>
             </div>
 
-            <p className={styles.text}>{horoscope}</p>
+            {loading ? (
+                <Skeleton variant="rectangular" width="100%" height={100} />
+            ) : (
+                <p className={styles.text}>{horoscope}</p>
+            )}
         </>
     );
 }

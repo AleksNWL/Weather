@@ -87,7 +87,7 @@ export default function FavoritesList() {
                     </div>
                     <div className={styles.favoritesList}>
                         {locations.length === 0 ? (
-                            <p className={styles.empty}>Избранные локации отсутствуют</p>
+                            <p className={styles.empty}>Пусто</p>
                         ) : (
                             <ul>
                                 {locations.map((loc, idx) => (

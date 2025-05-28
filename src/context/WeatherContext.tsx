@@ -22,7 +22,6 @@ export const WeatherProvider = ({ children }: WeatherProviderProps) => {
         const data = await getWeather(coords);
         if (data) {
             setWeather(data);
-            console.log(data);
         }
     };
 

@@ -1,7 +1,7 @@
-import {getMagneticStorm, KPDataPoint} from "../../services/getMagneticStorm.ts";
-import {useEffect, useState} from "react";
-import styles from "./MagneticStorm.module.scss"
-
+import { getMagneticStorm, KPDataPoint } from "../../services/getMagneticStorm.ts";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@mui/material";
+import styles from "./MagneticStorm.module.scss";
 
 export default function MagneticStorm() {
     const [data, setData] = useState<KPDataPoint[] | null>(null);
@@ -10,16 +10,23 @@ export default function MagneticStorm() {
         getMagneticStorm().then(setData);
     }, []);
 
-    if (!data) return <div>Loading...</div>;
-
-    const dictionaryKp: Record<number, {color: string, info: string}> = {
-        0: {color: "#00e400", info: "Магнитное поле спокойно, нарушений нет"},
-        1: {color: "#a8e05f", info: "Слабая буря: возможны небольшие сбои связи"},
-        2: {color: "#fdd64b", info: "Умеренная буря: могут быть проблемы с навигацией и связью"},
-        3: {color: "#ff9b57", info: "Сильная буря: возможны сбои электросети и радиосвязи"},
-        4: {color: "#fe6a69", info: "Очень сильная буря: риск серьезных нарушений"},
-        5: {color: "#a97abc", info: "Экстремальная буря: крупные сбои в электронике и энергетике"}
+    if (!data) {
+        return (
+            <div className={styles.skeletonWrapper}>
+                <Skeleton variant="rectangular" width={210} height={60} />
+                <Skeleton variant="text" sx={{ fontSize: '1rem', mt: 2, width: 300 }} />
+            </div>
+        );
     }
+
+    const dictionaryKp: Record<number, { color: string, info: string }> = {
+        0: { color: "#00e400", info: "Магнитное поле спокойно, нарушений нет" },
+        1: { color: "#a8e05f", info: "Слабая буря: возможны небольшие сбои связи" },
+        2: { color: "#fdd64b", info: "Умеренная буря: могут быть проблемы с навигацией и связью" },
+        3: { color: "#ff9b57", info: "Сильная буря: возможны сбои электросети и радиосвязи" },
+        4: { color: "#fe6a69", info: "Очень сильная буря: риск серьезных нарушений" },
+        5: { color: "#a97abc", info: "Экстремальная буря: крупные сбои в электронике и энергетике" }
+    };
 
     const level = (kpIndex: number | undefined): number => {
         if (!kpIndex) kpIndex = 0;
@@ -32,12 +39,10 @@ export default function MagneticStorm() {
         if (kpIndex === 9) return 5;
 
         return 0;
-    }
+    };
 
-    const kpIndex = level(data.at(data.length-1)?.kp_index);
+    const kpIndex = level(data.at(data.length - 1)?.kp_index);
     const kpInfo = dictionaryKp[kpIndex];
-
-
 
     return (
         <>

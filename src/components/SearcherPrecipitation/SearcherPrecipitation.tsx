@@ -44,7 +44,6 @@ export default function SearcherPrecipitation() {
             let count = 0;
             for (let i = nextIndex; i < nextIndex + 3; i++) {
                 const code = hourly.weathercode[i];
-                console.log(hourly.time[i]);
                 if (getType(code) === currentType) {
                     count++;
                 } else {

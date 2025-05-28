@@ -22,7 +22,6 @@ export const PollenContextProvider = ({children}: PollenProviderProps) => {
         const data = await getPollen(coords);
         if (data) {
             setPollen(data);
-            console.log(data);
         }
     };
 

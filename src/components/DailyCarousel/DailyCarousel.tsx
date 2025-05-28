@@ -3,6 +3,8 @@ import { getAllDay } from "../../services/getAllDay.ts";
 import getIconWeather from "../../services/getIconWeather.ts";
 import { useRef, useState } from "react";
 import styles from "./DailyCarousel.module.scss";
+import { Skeleton } from '@mui/material';
+
 
 export default function DailyCarousel() {
     const { weather } = useWeather();
@@ -11,7 +13,22 @@ export default function DailyCarousel() {
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
 
-    if (!weather) return <div>Loading...</div>;
+    if (!weather) {
+        return (
+            <div className={styles["container-carousel"]}>
+                <div className={styles["container-carousel__scroll"]}>
+                    {[...Array(6)].map((_, i) => (
+                        <div key={i} className={styles["container-carousel__item"]}>
+                            <Skeleton variant="text" width={40} height={30} />
+                            <Skeleton variant="circular" width={64} height={64} />
+                            <Skeleton variant="text" width={40} height={30} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
 
     const hourly = getAllDay(weather.hourly);
     const weatherInfoNow = getIconWeather(weather.current_weather.weathercode);

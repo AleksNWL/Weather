@@ -1,17 +1,27 @@
-import {useWeather} from "../../context/WeatherContext.tsx";
+import { useWeather } from "../../context/WeatherContext.tsx";
 import styles from "./MainTemperature.module.scss";
 import getIconWeather from "../../services/getIconWeather.ts";
-
+import Skeleton from "@mui/material/Skeleton";
+import Box from "@mui/material/Box";
 
 export default function MainTemperature() {
     const { weather } = useWeather();
-    if (!weather) return <p>Загрузка погоды...</p>;
+
+    if (!weather) {
+        return (
+            <Box className={styles.mainContainer}>
+                <Box className={styles.container}>
+                    <Skeleton variant="text" width={150} height={96} />
+                    <Skeleton variant="text" width={200} height={32} />
+                </Box>
+                <Skeleton variant="circular" width={120} height={120} />
+            </Box>
+        );
+    }
 
     const now = new Date();
     const indexNow = weather.hourly.time.findIndex((t: string) => new Date(t) > now);
-
-    const weatherInfo = getIconWeather(weather.current_weather.weathercode)
-
+    const weatherInfo = getIconWeather(weather.current_weather.weathercode);
 
     return (
         <div className={styles.mainContainer}>
@@ -27,5 +37,5 @@ export default function MainTemperature() {
             </div>
             <img src={weatherInfo.src} alt={weatherInfo.icon} className={styles.icon} />
         </div>
-    )
+    );
 }

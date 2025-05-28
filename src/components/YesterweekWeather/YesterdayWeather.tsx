@@ -7,7 +7,7 @@ import pressure from "/tools/pressure.svg";
 import thermometer from "/tools/thermometer.svg";
 import getIconWeather from "../../services/getIconWeather.ts";
 import styles from "./YesterdayWeather.module.scss";
-
+import { Skeleton } from "@mui/material";
 
 interface WeatherProps {
     temperature_2m: number;
@@ -27,15 +27,34 @@ export default function YesterdayWeather() {
         const fetchData = async () => {
             if (coordinate) {
                 const data = await getLastWeekWeatherAtSameTime(coordinate);
-                setLoading(false);
                 setYesterweekWeather(data);
+                setLoading(false);
             }
         };
 
         fetchData();
     }, [coordinate]);
 
-    if (loading) return <div>Загрузка...</div>;
+    if (loading)
+        return (
+            <>
+                <Skeleton variant="text" width={180} height={32} style={{ marginBottom: 12 }} />
+                <div className={styles.container}>
+                    <div className={styles.containerMiddle}>
+                        {[...Array(4)].map((_, i) => (
+                            <div key={i} className={styles.containerMini}>
+                                <Skeleton variant="circular" width={24} height={24} />
+                                <Skeleton variant="text" width={80} height={24} />
+                            </div>
+                        ))}
+                    </div>
+                    <div className={styles.containerImage}>
+                        <Skeleton variant="circular" width={120} height={120} />
+                    </div>
+                </div>
+            </>
+        );
+
     if (!yesterweekWeather) return <div>Нет данных за вчера</div>;
 
     const weatherInfo = getIconWeather(yesterweekWeather.weathercode);

@@ -29,7 +29,8 @@ export default function Home() {
     const { setCoordinates } = useWeather();
     const { setCoords } = usePollen();
 
-    const [isSearch, setIsSearch] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isBigDisplay, setIsBigDisplay] = useState(false);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(async (position) => {
@@ -52,7 +53,8 @@ export default function Home() {
         });
 
         const handleResize = () => {
-            setIsSearch(window.innerWidth <= 1080);
+            setIsMobile(window.innerWidth <= 1360);
+            setIsBigDisplay(window.innerWidth >= 1620);
         };
 
         handleResize();
@@ -62,7 +64,7 @@ export default function Home() {
 
     return (
         <div className={styles.mainContainer}>
-            {isSearch ? (
+            {isMobile ? (
                 <div className={styles.search}>
                     <div className={styles.helpContainer}>
                         <div className={styles.likeContainer}>
@@ -103,27 +105,59 @@ export default function Home() {
                     <YesterdayWeather />
                 </div>
 
-                <div className={styles.littleContainer}>
-                    <span className={styles.heading}>Качество воздуха</span>
-                    <AqiSemiCircle />
-                </div>
-                <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
-                    <span className={styles.heading}>UV-индекс</span>
-                    <UVIndex />
-                </div>
+                { (isMobile || isBigDisplay)
+                    ?
+                    <div className={styles.sharedContainer}>
+                        <div className={styles.littleContainer}>
+                            <span className={styles.heading}>Качество воздуха</span>
+                            <AqiSemiCircle />
+                        </div>
+                        <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
+                            <span className={styles.heading}>UV-индекс</span>
+                            <UVIndex />
+                        </div>
+                    </div>
+                    :
+                    <>
+                        <div className={styles.littleContainer}>
+                            <span className={styles.heading}>Качество воздуха</span>
+                            <AqiSemiCircle />
+                        </div>
+                        <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
+                            <span className={styles.heading}>UV-индекс</span>
+                            <UVIndex />
+                        </div>
+                    </>
+                }
 
-                <div className={styles.highContainer}>
+                <div className={`${styles.highContainer} ${styles.pollenContainer}`}>
                     <PollenChart />
                 </div>
 
-                <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
-                    <span className={styles.heading}>Магнитное поле</span>
-                    <MagneticStorm />
-                </div>
-                <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
-                    <span className={styles.heading}>Фаза луны</span>
-                    <MoonPhases />
-                </div>
+                { (isMobile || isBigDisplay)
+                    ?
+                    <div className={styles.sharedContainer}>
+                        <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
+                            <span className={styles.heading}>Магнитное поле</span>
+                            <MagneticStorm />
+                        </div>
+                        <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
+                            <span className={styles.heading}>Фаза луны</span>
+                            <MoonPhases />
+                        </div>
+                    </div>
+                    :
+                    <>
+                        <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
+                            <span className={styles.heading}>Магнитное поле</span>
+                            <MagneticStorm />
+                        </div>
+                        <div className={`${styles.littleContainer} ${styles.innerContainer}`}>
+                            <span className={styles.heading}>Фаза луны</span>
+                            <MoonPhases />
+                        </div>
+                    </>
+                }
 
                 <div className={`${styles.middleContainer} ${styles.innerContainer}`}>
                     <span className={styles.heading}>Видимость на дорогах</span>

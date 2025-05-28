@@ -3,8 +3,11 @@ import Arrow from "/tools/arrow.svg";
 import styles from "./WeekCarousel.module.scss";
 import { useWeather } from "../../context/WeatherContext.tsx";
 import getIconWeather from "../../services/getIconWeather.ts";
-import {useCoordsCity} from "../../context/CoordsCityContext.tsx";
+import { useCoordsCity } from "../../context/CoordsCityContext.tsx";
 import declineNameCity from "../../services/declineNameCity.ts";
+import Umbrella from "/tools/umbrella.svg";
+import { Skeleton } from "@mui/material";
+
 
 interface HourlyData {
     time: string[];
@@ -50,7 +53,13 @@ export default function WeekCarousel() {
         return () => current.removeEventListener("scroll", onScroll);
     }, []);
 
-    if (!weather || !weather.hourly) return <div>Loading...</div>;
+    if (!weather || !weather.hourly)
+        return (
+            <div className={styles.weekCarousel} style={{ padding: "1rem" }}>
+                <Skeleton variant="text" width={300} height={40} style={{ marginBottom: 16 }} />
+                <Skeleton variant="rectangular" width="100%" height={180} />
+            </div>
+        );
 
     const dailyData = splitHourlyDataIntoDays(weather.hourly);
 
@@ -119,7 +128,6 @@ export default function WeekCarousel() {
         scrollRef.current.scrollBy({ left: amount, behavior: "smooth" });
     };
 
-
     return (
         <div className={styles.weekCarousel}>
             <div className={styles.header}>
@@ -158,38 +166,25 @@ export default function WeekCarousel() {
 
                         return (
                             <div key={index} className={styles.dayItem}>
-                <span>
+                <span className={styles.weekDay}>
                   {new Date(day.time[0]).toLocaleDateString("ru-RU", {
                       weekday: "short",
                   })}
                 </span>
 
-                                <img
-                                    src={weatherInfo.src}
-                                    alt={weatherInfo.icon}
-                                    className={styles.weatherIcon}
-                                />
+                                <img src={weatherInfo.src} alt={weatherInfo.icon} className={styles.weatherIcon} />
 
                                 <div className={styles.info}>
-                                    <div className={styles.tempRange}>
-                    <span className={styles.tempMin}>
-                      {formatTemp(Math.min(...day.temperature_2m))}
-                    </span>
-                                        <span className={styles.tempDivider}>...</span>
-                                        <span className={styles.tempMax}>
-                      {formatTemp(Math.max(...day.temperature_2m))}
-                    </span>
-                                    </div>
+                  <span className={styles.temp}>
+                    {formatTemp(Math.min(...day.temperature_2m))}...{formatTemp(Math.max(...day.temperature_2m))}
+                  </span>
 
                                     <div className={styles.precipitation}>
-                    <span className={styles.precipitationValue}>
-                      {Math.max(...day.precipitation_probability)}%
-                    </span>
+                                        <img src={Umbrella} alt={Umbrella} className={styles.umbrella} />
+                                        <span className={styles.precipitationValue}>{Math.max(...day.precipitation_probability)}%</span>
                                     </div>
 
-                                    <span className={styles.weatherDescription}>
-                    {weatherInfo.title}
-                  </span>
+                                    <span className={styles.weatherDescription}>{weatherInfo.title}</span>
                                 </div>
                             </div>
                         );

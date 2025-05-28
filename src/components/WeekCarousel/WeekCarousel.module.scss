@@ -1,3 +1,8 @@
+.weekCarousel {
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
   display: flex;
   gap: 0.2rem;
@@ -5,15 +10,15 @@
 
 .dayList {
   display: flex;
-  gap: 2rem;
+  gap: 32px;
 }
 
 .dayItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 12px 24px;
-  gap: 12px;
+  padding: 12px 20px 0;
+  gap: 8px;
   background-color: var(--color-third-bg);
   min-width: 160px;
   max-width: 240px;
@@ -21,16 +26,36 @@
   border-radius: 10px;
 }
 
+.weekDay {
+  font-size: 24px;
+  font-weight: 700;
+}
+
 .weatherIcon {
-  width: 4rem;
+  width: 64px;
 }
 
 .info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
+.temp {
+  font-size: 18px;
+}
+
+.precipitation {
+  display: flex;
+  gap: 8px;
+}
+
+.precipitationValue {
+  font-size: 18px;
 }
 
 .weatherDescription {
-  font-size: 0.8rem;
+  font-size: 18px;
   max-width: 120px;
 }
 

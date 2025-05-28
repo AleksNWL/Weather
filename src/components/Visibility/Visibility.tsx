@@ -1,6 +1,6 @@
-import {useWeather} from "../../context/WeatherContext.tsx";
+import { useWeather } from "../../context/WeatherContext.tsx";
 import "./Visibility.scss";
-
+import { Skeleton } from "@mui/material";
 
 const levelInfo = [
     { max: 50, level: 1, color: "#fe6a69", label: "Очень плотный туман" },
@@ -17,13 +17,19 @@ const levelInfo = [
 
 export default function Visibility() {
     const { weather } = useWeather();
-    if (!weather) return <div>Loading...</div>;
+
+    if (!weather)
+        return (
+            <div style={{ padding: "10px 0" }}>
+                <Skeleton variant="rectangular" width={200} height={70} />
+            </div>
+        );
 
     const nowTime = new Date();
-    const now = weather.hourly.time.findIndex(t => new Date(t) >= nowTime);
+    const now = weather.hourly.time.findIndex((t) => new Date(t) >= nowTime);
     const visibility = weather.hourly.visibility[now];
 
-    const levelData = levelInfo.find(l => visibility <= l.max)!;
+    const levelData = levelInfo.find((l) => visibility <= l.max)!;
 
     return (
         <>
@@ -41,7 +47,7 @@ export default function Visibility() {
                 ))}
             </div>
 
-            <p>
+            <p style={{ fontWeight: "600" }}>
                 {levelData.label.split(" ")[0]}&nbsp;
                 <span
                     style={{
@@ -50,12 +56,10 @@ export default function Visibility() {
                         height: "12px",
                         borderRadius: "50%",
                         backgroundColor: levelData.color,
-                        marginRight: "6px",
-                        verticalAlign: "middle",
                     }}
                 ></span>
                 {levelData.label.split(" ").slice(1).join(" ")}
             </p>
         </>
-    )
+    );
 }

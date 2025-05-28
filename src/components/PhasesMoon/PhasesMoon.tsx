@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getMoonPhases } from "../../services/getPhasesMoon.ts";
 import styles from "./PhasesMoon.module.scss";
-
+import Skeleton from "@mui/material/Skeleton";
+import Box from "@mui/material/Box";
 
 const moonPhases = [
     { id: 0, rus: "Новолуние", eng: "newMoon" },
@@ -35,7 +36,14 @@ export default function MoonPhases() {
         })();
     }, []);
 
-    if (!phaseEng) return <div>Загрузка данных о фазе Луны...</div>;
+    if (!phaseEng) {
+        return (
+            <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+                <Skeleton variant="circular" width={120} height={120} />
+                <Skeleton variant="text" width={160} height={32} />
+            </Box>
+        );
+    }
 
     const phase = moonPhases.find(p => p.eng === phaseEng) || moonPhases[0];
 

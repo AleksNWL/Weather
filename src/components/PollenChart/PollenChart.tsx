@@ -162,7 +162,7 @@ export function PollenChart() {
                             <div key={i} className={styles.setData}>
                                 <div style={{
                                     height: `${entry.value === 0 ? 0 : 8 * entry.value}px`,
-                                    width: "20px",
+                                    width: "15px",
                                     backgroundColor: getColor(entry.value)
                                 }}
                                      className={styles.levelPost}

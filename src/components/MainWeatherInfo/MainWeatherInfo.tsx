@@ -1,13 +1,26 @@
 import drop from "/tools/drop.svg";
 import wind from "/tools/wind.svg";
 import pressure from "/tools/pressure.svg";
-import {useWeather} from "../../context/WeatherContext.tsx";
+import { useWeather } from "../../context/WeatherContext.tsx";
 import styles from "./MainWeatherInfo.module.scss";
-
+import Skeleton from "@mui/material/Skeleton";
+import Box from "@mui/material/Box";
 
 export default function MainWeatherInfo() {
     const { weather } = useWeather();
-    if (!weather) return <p>Загрузка погоды...</p>;
+
+    if (!weather) {
+        return (
+            <>
+                {[1, 2, 3].map((_, i) => (
+                    <Box key={i} className={styles.container}>
+                        <Skeleton variant="circular" width={32} height={32} />
+                        <Skeleton variant="text" width={80} height={24} />
+                    </Box>
+                ))}
+            </>
+        );
+    }
 
     const now = new Date();
     const indexNow = weather.hourly.time.findIndex((t: string) => new Date(t) > now);
@@ -28,5 +41,5 @@ export default function MainWeatherInfo() {
                 <span className={styles.title}>{nowPressure} мм рт. ст.</span>
             </div>
         </>
-    )
+    );
 }
