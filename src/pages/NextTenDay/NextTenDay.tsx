@@ -1,10 +1,57 @@
 import { useWeather } from "../../context/WeatherContext";
 import getIconWeather from "../../services/getIconWeather";
 import styles from "./NextTenDay.module.scss";
+import { Skeleton } from '@mui/material';
+
+
+interface DayData {
+    time: string[];
+    temperature_2m: number[];
+    weathercode: number[];
+    precipitation_probability: number[];
+    windgusts_10m: number[];
+}
+
+interface BlockData {
+    weathercode: number;
+    temp: number;
+    precipitation: number;
+    wind: number;
+}
+
 
 export default function NextTenDay() {
     const { weather } = useWeather();
-    if (!weather) return null;
+
+    if (!weather) {
+        return (
+            <div className={styles.nextTenDay}>
+                {[...Array(10)].map((_, dayIndex) => (
+                    <div key={dayIndex} className={styles.dayBlock}>
+                        <h3 className={styles.date}>
+                            <Skeleton variant="text" width={140} height={32} />
+                        </h3>
+                        <div className={styles.blocks}>
+                            {[...Array(4)].map((_, blockIndex) => (
+                                <div key={blockIndex} className={styles.timeBlock}>
+                                    <div className={styles.info}>
+                                        <h4 className={styles.timeDay}>
+                                            <Skeleton variant="text" width={60} height={24} />
+                                        </h4>
+                                        <p className={styles.label}><Skeleton variant="text" width={30} height={20} /></p>
+                                        <p className={styles.label}><Skeleton variant="text" width={30} height={20} /></p>
+                                        <p className={styles.label}><Skeleton variant="text" width={30} height={20} /></p>
+                                        <p className={styles.label}><Skeleton variant="text" width={80} height={20} /></p>
+                                    </div>
+                                    <Skeleton variant="circular" width={48} height={48} />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
+    }
 
     const { time, temperature_2m, weathercode, precipitation_probability, windgusts_10m } = weather.hourly;
 
@@ -23,10 +70,10 @@ export default function NextTenDay() {
         const date = new Date(dateString);
         if (index === 0) return `Сегодня (${date.toLocaleDateString("ru-RU")})`;
         if (index === 1) return `Завтра (${date.toLocaleDateString("ru-RU")})`;
-        return `${date.toLocaleDateString("ru-RU", { weekday: "short" })} (${date.toLocaleDateString("ru-RU")})`;
+        return `${date.toLocaleDateString("ru-RU", { weekday: "short" }).toUpperCase()} (${date.toLocaleDateString("ru-RU")})`;
     };
 
-    const getBlockData = (startHour: number, endHour: number, dayData: any) => {
+    const getBlockData = (startHour: number, endHour: number, dayData: DayData): BlockData => {
         const range = [];
         for (let i = startHour; i <= endHour; i++) {
             range.push({
@@ -39,6 +86,7 @@ export default function NextTenDay() {
         }
 
         const avg = (arr: number[]) => Math.round(arr.reduce((a, b) => a + b, 0) / arr.length);
+
         return {
             weathercode: range[0].code,
             temp: avg(range.map(x => x.temp)),
@@ -46,6 +94,7 @@ export default function NextTenDay() {
             wind: avg(range.map(x => x.wind)),
         };
     };
+
 
     const blocks = [
         { label: "Ночью", hours: [0, 5] },
@@ -67,11 +116,11 @@ export default function NextTenDay() {
                             return (
                                 <div key={label} className={styles.timeBlock}>
                                     <div className={styles.info}>
-                                        <h4>{label}</h4>
-                                        <p>Темп: {data.temp}°C</p>
-                                        <p>Осадки: {data.precipitation}%</p>
-                                        <p>Ветер: {data.wind} м/с</p>
-                                        <p>{iconInfo.title}</p>
+                                        <h4 className={styles.timeDay}>{label}</h4>
+                                        <p className={styles.label}>{data.temp}°C</p>
+                                        <p className={styles.label}>{data.precipitation}%</p>
+                                        <p className={styles.label}>{data.wind} м/с</p>
+                                        <p className={styles.label}>{iconInfo.title}</p>
                                     </div>
                                     <img
                                         src={iconInfo.src}

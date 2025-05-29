@@ -6,7 +6,7 @@
 }
 
 .dayBlock {
-  border: 1px solid #ccc;
+  background-color: var(--color-secondary-bg);
   border-radius: 8px;
   padding: 1rem;
 }
@@ -23,9 +23,45 @@
   gap: 1rem;
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .timeBlock {
+  display: flex;
+  justify-content: space-between;
   flex: 1 1 200px;
-  background-color: var(--color-secondary-bg);
+  background-color: var(--color-third-bg);
   padding: 0.5rem;
   border-radius: 6px;
+}
+
+.timeDay {
+  font-size: 20px;
+  padding-bottom: 8px;
+}
+
+.label {
+  font-size: 18px;
+}
+
+.icon {
+  width: 72px;
+}
+
+@media (max-width: 1440px) {
+  .timeDay {
+    font-size: 18px;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .icon {
+    width: 48px;
+    min-width: 48px;
+  }
 }
