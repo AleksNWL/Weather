@@ -5,22 +5,6 @@
   padding-top: 40px;
 }
 
-.helpContainer {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.search {
-  display: flex;
-  justify-content: space-around;
-}
-
-.likeContainer {
-  display: flex;
-  gap: 32px;
-}
-
 .mainWeather {
   display: flex;
   justify-content: space-between;
@@ -122,30 +106,8 @@
   justify-content: space-between;
 }
 
-.footer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: var(--color-secondary-bg);
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
-  padding-top: 40px;
-  padding-bottom: 20px;
-}
-
 .heading {
   font-weight: 700;
-}
-
-@media (max-width: 1360px) {
-  .likeContainer {
-    gap: 30px;
-  }
-  .search {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-  }
 }
 
 @media (max-width: 1280px) {

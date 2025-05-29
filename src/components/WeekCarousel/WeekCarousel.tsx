@@ -7,6 +7,7 @@ import { useCoordsCity } from "../../context/CoordsCityContext.tsx";
 import declineNameCity from "../../services/declineNameCity.ts";
 import Umbrella from "/tools/umbrella.svg";
 import { Skeleton } from "@mui/material";
+import { Link } from "react-router";
 
 
 interface HourlyData {
@@ -128,12 +129,31 @@ export default function WeekCarousel() {
         scrollRef.current.scrollBy({ left: amount, behavior: "smooth" });
     };
 
+    const onTouchStart = (e: React.TouchEvent) => {
+        if (!scrollRef.current) return;
+        setIsDragging(true);
+        setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
+        setScrollLeft(scrollRef.current.scrollLeft);
+    };
+
+    const onTouchMove = (e: React.TouchEvent) => {
+        if (!isDragging || !scrollRef.current) return;
+        const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+        const walk = (x - startX) * 2;
+        scrollRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const onTouchEnd = () => {
+        setIsDragging(false);
+        updateArrowVisibility();
+    };
+
     return (
         <div className={styles.weekCarousel}>
-            <div className={styles.header}>
+            <Link to={"/weather-next-ten-day"} className={styles.header}>
                 <h2 className={styles.title}>Погода в {declineNameCity(city)} на 10 дней</h2>
                 <img src={Arrow} alt="arrow" className={styles.arrowIcon} />
-            </div>
+            </Link>
 
             <div className={styles.carouselWrapper}>
                 {showLeftArrow && (
@@ -155,6 +175,9 @@ export default function WeekCarousel() {
                     onMouseLeave={onMouseLeave}
                     onMouseUp={onMouseUp}
                     onMouseMove={onMouseMove}
+                    onTouchStart={onTouchStart}
+                    onTouchMove={onTouchMove}
+                    onTouchEnd={onTouchEnd}
                     style={{
                         cursor: isDragging ? "grabbing" : "grab",
                         userSelect: isDragging ? "none" : "auto",
@@ -166,18 +189,18 @@ export default function WeekCarousel() {
 
                         return (
                             <div key={index} className={styles.dayItem}>
-                <span className={styles.weekDay}>
-                  {new Date(day.time[0]).toLocaleDateString("ru-RU", {
-                      weekday: "short",
-                  })}
-                </span>
+                                <span className={styles.weekDay}>
+                                  {new Date(day.time[0]).toLocaleDateString("ru-RU", {
+                                      weekday: "short",
+                                  })}
+                                </span>
 
                                 <img src={weatherInfo.src} alt={weatherInfo.icon} className={styles.weatherIcon} />
 
                                 <div className={styles.info}>
-                  <span className={styles.temp}>
-                    {formatTemp(Math.min(...day.temperature_2m))}...{formatTemp(Math.max(...day.temperature_2m))}
-                  </span>
+                                    <span className={styles.temp}>
+                                        {formatTemp(Math.min(...day.temperature_2m))}...{formatTemp(Math.max(...day.temperature_2m))}
+                                    </span>
 
                                     <div className={styles.precipitation}>
                                         <img src={Umbrella} alt={Umbrella} className={styles.umbrella} />

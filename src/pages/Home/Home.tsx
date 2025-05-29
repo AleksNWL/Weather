@@ -1,56 +1,25 @@
 import { useEffect, useState } from "react";
 import styles from "./Home.module.scss";
-
-import Search from "../../components/Search/Search.tsx";
-import { getCity } from "../../services/getCity.ts";
-import { useCoordsCity } from "../../context/CoordsCityContext.tsx";
 import MainTemperature from "../../components/MainTemperature/MainTemperature.tsx";
 import DailyCarousel from "../../components/DailyCarousel/DailyCarousel.tsx";
 import MainWeatherInfo from "../../components/MainWeatherInfo/MainWeatherInfo.tsx";
 import SearcherPrecipitation from "../../components/SearcherPrecipitation/SearcherPrecipitation.tsx";
-import Footer from "../../components/Footer/Footer.tsx";
 import { PollenChart } from "../../components/PollenChart/PollenChart.tsx";
 import WeekCarousel from "../../components/WeekCarousel/WeekCarousel.tsx";
 import AqiSemiCircle from "../../components/AqiSemiCircle/AqiSemiCircle.tsx";
-import { useWeather } from "../../context/WeatherContext.tsx";
-import { usePollen } from "../../context/PollenContext.tsx";
 import YesterdayWeather from "../../components/YesterweekWeather/YesterdayWeather.tsx";
 import MagneticStorm from "../../components/MagneticStorm/MagneticStorm.tsx";
 import Visibility from "../../components/Visibility/Visibility.tsx";
 import MoonPhases from "../../components/PhasesMoon/PhasesMoon.tsx";
 import UVIndex from "../../components/UVIndex/UVIndex.tsx";
 import Horoscope from "../../components/Horoscope/Horoscope.tsx";
-import ToggleTheme from "../../components/ToggleTheme/ToggleTheme.tsx";
-import Like from "../../components/Like/Like.tsx";
-import FavoritesList from "../../components/FavoritesList/FavoritesList.tsx";
 
 export default function Home() {
-    const { setCity, setCoordinate } = useCoordsCity();
-    const { setCoordinates } = useWeather();
-    const { setCoords } = usePollen();
 
     const [isMobile, setIsMobile] = useState(false);
     const [isBigDisplay, setIsBigDisplay] = useState(false);
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(async (position) => {
-            const detectedCity = await getCity(position.coords);
-            if (detectedCity) {
-                setCity(detectedCity);
-                setCoordinate({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                });
-                setCoordinates({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                });
-                setCoords({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                });
-            }
-        });
 
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 1360);
@@ -64,27 +33,6 @@ export default function Home() {
 
     return (
         <div className={styles.mainContainer}>
-            {isMobile ? (
-                <div className={styles.search}>
-                    <div className={styles.helpContainer}>
-                        <div className={styles.likeContainer}>
-                            <Like />
-                            <FavoritesList />
-                        </div>
-                        <ToggleTheme />
-                    </div>
-                    <Search />
-                </div>
-            ) : (
-                <div className={styles.search}>
-                    <div className={styles.likeContainer}>
-                        <Like />
-                        <FavoritesList />
-                    </div>
-                    <Search />
-                    <ToggleTheme />
-                </div>
-            )}
 
             <div className={styles.mainWeather}>
                 <div className={styles.mainTemperature}>
@@ -171,10 +119,6 @@ export default function Home() {
             <div className={styles.weeklyContainer}>
                 <WeekCarousel />
             </div>
-
-            <footer className={styles.footer}>
-                <Footer />
-            </footer>
         </div>
     );
 }
