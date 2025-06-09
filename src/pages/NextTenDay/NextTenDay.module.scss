@@ -51,6 +51,17 @@
   width: 72px;
 }
 
+.link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.linkText {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
 @media (max-width: 1440px) {
   .timeDay {
     font-size: 18px;

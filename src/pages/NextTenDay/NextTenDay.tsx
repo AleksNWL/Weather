@@ -2,6 +2,8 @@ import { useWeather } from "../../context/WeatherContext";
 import getIconWeather from "../../services/getIconWeather";
 import styles from "./NextTenDay.module.scss";
 import { Skeleton } from '@mui/material';
+import {Link} from "react-router";
+import Arrow from "/tools/arrow.svg";
 
 
 interface DayData {
@@ -26,6 +28,7 @@ export default function NextTenDay() {
     if (!weather) {
         return (
             <div className={styles.nextTenDay}>
+                <h1>Назад</h1>
                 {[...Array(10)].map((_, dayIndex) => (
                     <div key={dayIndex} className={styles.dayBlock}>
                         <h3 className={styles.date}>
@@ -105,6 +108,10 @@ export default function NextTenDay() {
 
     return (
         <div className={styles.nextTenDay}>
+            <Link to={"/"} className={styles.link}>
+                <img src={Arrow} alt={Arrow} style={{rotate: "180deg"}}/>
+                <span className={styles.linkText}>Назад</span>
+            </Link>
             {days.slice(0, 10).map((day, i) => (
                 <div key={i} className={styles.dayBlock}>
                     <h3 className={styles.date}>{getLabelForDay(i, day.time[0])}</h3>

@@ -48,7 +48,7 @@ export default function Visibility() {
             </div>
 
             <p style={{ fontWeight: "600" }}>
-                {levelData.label.split(" ")[0]}&nbsp;
+                {levelData.label}&nbsp;
                 <span
                     style={{
                         display: "inline-block",
@@ -58,7 +58,6 @@ export default function Visibility() {
                         backgroundColor: levelData.color,
                     }}
                 ></span>
-                {levelData.label.split(" ").slice(1).join(" ")}
             </p>
         </>
     );

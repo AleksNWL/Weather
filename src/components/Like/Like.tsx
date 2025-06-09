@@ -1,6 +1,7 @@
 import styles from "./Like.module.scss";
 import { useState, useEffect } from "react";
 import { useCoordsCity } from "../../context/CoordsCityContext.tsx";
+import {motion} from "framer-motion";
 
 type LikedLocation = {
     name: string;
@@ -95,7 +96,7 @@ export default function Like() {
 
     return (
         <>
-            <div onClick={handleLikeClick}>
+            <motion.div onClick={handleLikeClick} whileHover={{scale: 1.2}} transition={{ duration: 2, type: "spring" }}>
                 {liked ? (
                     <svg width="56" height="50" viewBox="0 0 56 50" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.likeOn} onClick={handleLikeClick}>
                         <g filter="url(#filter0_d_337_20)">
@@ -135,7 +136,7 @@ export default function Like() {
                     </svg>
 
                 )}
-            </div>
+            </motion.div>
 
             {showPopup && (
                 <div className={styles.overlay} onClick={() => setShowPopup(false)}>
